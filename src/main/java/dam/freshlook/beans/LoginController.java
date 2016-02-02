@@ -1,4 +1,4 @@
-package dam.freshlook;
+package dam.freshlook.beans;
 
 import java.io.IOException;
 
