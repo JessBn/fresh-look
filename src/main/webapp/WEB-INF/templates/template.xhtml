@@ -2,7 +2,9 @@
    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>CustomLoginPage - tutorials.slackspace.de</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -11,7 +13,37 @@
 <h:body>
 	<h:panelGroup id="page" layout="block">
 		<h:panelGroup id="header" layout="block">
-			<h1><a href="home.jsf">CustomLoginPage with Spring-Security and JSF</a></h1>
+			<h:form>
+				<p:menubar style="background-color:lightblue">
+
+					<p:menuitem value="Inicio" url="protected.jsf" icon="ui-icon-home" />
+
+					<p:submenu label="Clientes" icon="ui-icon-male">
+						<p:menuitem value="Lista clientes" url="clientes.jsf"
+							icon="ui-icon-male" />
+						<p:menuitem value="Añadir cliente" url="#"
+							icon="ui-icon-plus-squaredw" />
+					</p:submenu>
+
+					<p:submenu label="Compra" icon="ui-icon-euro"
+						url="../../anadirStock.jsf" />
+					<p:submenu label="Productos" icon="ui-icon-euro">
+						<p:menuitem value="Lista productos" url="productos.jsf"
+							icon="ui-icon-euro" />
+						<p:menuitem value="Añadir Stock" url="anadirStock.jsf"
+							icon="ui-icon-euro" />
+					</p:submenu>
+
+
+
+					<f:facet name="options">
+						<p:commandButton type="submit" value="Logout"
+							icon="ui-icon-extlink" actionListener="#{templateBean.doLogout}"
+							ajax="false" />
+					</f:facet>
+
+				</p:menubar>
+			</h:form>
 		</h:panelGroup>
 		<h:panelGroup id="container" layout="block">
 			<h:panelGroup id="content" layout="block">

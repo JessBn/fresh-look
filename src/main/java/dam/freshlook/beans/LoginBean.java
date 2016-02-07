@@ -22,7 +22,7 @@ import org.springframework.security.web.WebAttributes;
 
 @ManagedBean(name="loginController")
 @RequestScoped
-public class LoginController implements PhaseListener {
+public class LoginBean implements PhaseListener {
 
 	 protected final Log logger = LogFactory.getLog(getClass());
 	
