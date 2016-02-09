@@ -8,34 +8,38 @@
       
       <ui:define name="content">
 
-        <p:inputText style="margin-right:7%; ; float: right" placeholder="Buscar">
+        <p:inputText style= "margin-right:2%; float: right" placeholder="Buscar">
             <p:ajax />
         </p:inputText>
-        <p:dataTable var="client" value="#{dtBasicView.cars}" rows="15" paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="15, 20, 30">
+        <p:dataTable var="client" value="#{clientesBean.clientes.clientes}" rows="15" paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="15, 20, 30">
             <p:column headerText="Id">
                 <h:outputText value="#{client.id}" />
             </p:column>
  
-            <p:column headerText="Year">
-                <h:outputText value="#{client.year}" />
+            <p:column headerText="Nombre">
+                <h:outputText value="#{client.nombre}" />
             </p:column>
 
-            <p:column headerText="Brand">
-                <h:outputText value="#{client.brand}" />
+            <p:column headerText="Apellidos">
+                <h:outputText value="#{client.apellidos}" />
             </p:column>
 
-            <p:column headerText="Color">
-                <h:outputText value="#{client.color}" />
+            <p:column headerText="Direccion">
+                <h:outputText value="#{client.direccion}" />
             </p:column>
             
-            <p:column headerText="Opciones" style="width:140px">
-                <p:commandButton type="button" icon="ui-icon-delete" style="float: right;"/>
-                <p:commandButton type="button" icon="ui-icon-edit" style="float: right;"/>
-                <p:commandButton type="button" icon="ui-icon-search" style="float: right;"/>
+            <p:column headerText="Usuario">
+                <h:outputText value="#{client.usuario}" />
+            </p:column>
+            
+            <p:column headerText="Opciones">
+                <p:commandButton type="submit" actionListener="#{clientesBean.eliminarCliente(client)}" icon="ui-icon-trash" style="float: center;" />
+                <p:commandButton type="submit" actionListener="#{clientesBean.eliminarCliente(client)}" icon="ui-icon-pencil" style="float: center;"/>
+                <p:commandButton type="submit" actionListener="#{clientesBean.eliminarCliente(client)}" icon="ui-icon-search" style="float: center;"/>
             </p:column>
         </p:dataTable>
         
-        <p:commandButton type="button" value="Añadir Cliente" icon="ui-icon-plus" style="float: right; margin-top:2%; margin-right: 5%;"/>
+        <p:commandButton type="button" value="Añadir Cliente" icon="ui-icon-plus" style="float: right; margin-top:2%;"/>
         <h:panelGroup/>
       </ui:define>
 </ui:composition>

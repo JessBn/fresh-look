@@ -1,22 +1,34 @@
  package dam.freshlook.pojos;
 
 public class Cliente {
+	int id;
 	String nombre;
 	String apellidos;
 	String direccion;
 	String usuario;
-	String contraseña;
-	public Cliente(String nombre, String apellidos, String direccion, String usuario, String contraseña) {
+	String contrasena;
+	public Cliente(int id, String nombre, String apellidos, String direccion, String usuario, String contrasena) {
 		super();
+		this.id=id;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.direccion = direccion;
 		this.usuario = usuario;
-		this.contraseña = contraseña;
+		this.contrasena = contrasena;
 	}
+	
 	public Cliente() {
 		super();
 	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -41,16 +53,16 @@ public class Cliente {
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
-	public String getContraseña() {
-		return contraseña;
+	public String getContrasena() {
+		return contrasena;
 	}
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
 	}
 	@Override
 	public String toString() {
 		return "Cliente [nombre=" + nombre + ", apellidos=" + apellidos + ", direccion=" + direccion + ", usuario="
-				+ usuario + ", contraseña=" + contraseña + "]";
+				+ usuario + ", contraseña=" + contrasena + "]";
 	}
 	
 	
