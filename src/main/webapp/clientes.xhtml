@@ -5,41 +5,86 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/template.xhtml">
-      
-      <ui:define name="content">
 
-        <p:inputText style= "margin-right:2%; float: right" placeholder="Buscar">
-            <p:ajax />
-        </p:inputText>
-        <p:dataTable var="client" value="#{clientesBean.clientes.clientes}" rows="15" paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="15, 20, 30">
-            <p:column headerText="Id">
-                <h:outputText value="#{client.id}" />
-            </p:column>
- 
-            <p:column headerText="Nombre">
-                <h:outputText value="#{client.nombre}" />
-            </p:column>
+	<ui:define name="content">
 
-            <p:column headerText="Apellidos">
-                <h:outputText value="#{client.apellidos}" />
-            </p:column>
+		<p:inputText style="margin-right:2%; float: right"
+			placeholder="Buscar">
+			<p:ajax />
+		</p:inputText>
+		<h:form>
+		<p:remoteCommand name="cargaTerminada" action="#{clientesBean.clientes.clientes}" update="tablaClientes" />
+		<p:dataTable id="tablaClientes" var="client"
+			value="#{clientesBean.clientes.clientes}" rows="15" paginator="true"
+			paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="15, 20, 30">
+			<p:column headerText="Id">
+				<h:outputText value="#{client.id}" />
+			</p:column>
 
-            <p:column headerText="Direccion">
-                <h:outputText value="#{client.direccion}" />
-            </p:column>
-            
-            <p:column headerText="Usuario">
-                <h:outputText value="#{client.usuario}" />
-            </p:column>
-            
-            <p:column headerText="Opciones">
-                <p:commandButton type="submit" actionListener="#{clientesBean.eliminarCliente(client)}" icon="ui-icon-trash" style="float: center;" />
-                <p:commandButton type="submit" actionListener="#{clientesBean.eliminarCliente(client)}" icon="ui-icon-pencil" style="float: center;"/>
-                <p:commandButton type="submit" actionListener="#{clientesBean.eliminarCliente(client)}" icon="ui-icon-search" style="float: center;"/>
-            </p:column>
-        </p:dataTable>
-        
-        <p:commandButton type="button" value="Añadir Cliente" icon="ui-icon-plus" style="float: right; margin-top:2%;"/>
-        <h:panelGroup/>
-      </ui:define>
+			<p:column headerText="Nombre">
+				<h:outputText value="#{client.nombre}" />
+			</p:column>
+
+			<p:column headerText="Apellidos">
+				<h:outputText value="#{client.apellidos}" />
+			</p:column>
+
+			<p:column headerText="Direccion">
+				<h:outputText value="#{client.direccion}" />
+			</p:column>
+
+			<p:column headerText="Usuario">
+				<h:outputText value="#{client.usuario}" />
+			</p:column>
+
+			<p:column headerText="Opciones">
+				<p:commandButton type="submit"
+					actionListener="#{clientesBean.eliminarCliente(client)}"
+					icon="ui-icon-trash" style="float: center;" />
+				<p:commandButton type="submit"
+					actionListener="#{clientesBean.eliminarCliente(client)}"
+					icon="ui-icon-pencil" style="float: center;" />
+				<p:commandButton type="submit"
+					actionListener="#{clientesBean.eliminarCliente(client)}"
+					icon="ui-icon-search" style="float: center;" />
+			</p:column>
+		</p:dataTable>
+		</h:form>
+		<h:form>
+
+			<p:commandButton value="Añadir Cliente" 
+				onclick="PF('insertar').show();" type="button" icon="ui-icon-plus"
+				style="float: right; margin-top:2%;" />
+			<p:dialog header="Nuevo cliente" widgetVar="insertar"
+				focus="clNombre">
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputLabel for="nombre" value="Nombre:" />
+					<p:inputText id="clNombre" label="nombre" binding="#{nombre}" />
+
+					<h:outputLabel for="apellidos" value="Apellidos:" />
+					<p:inputText id="clApellidos" label="apellidos"
+						binding="#{apellidos}" />
+
+					<h:outputLabel for="direccion" value="Dirección:" />
+					<p:inputText id="clDireccion" label="direccion"
+						binding="#{direccion}" />
+
+					<h:outputLabel for="usuario" value="Usuario:" />
+					<p:inputText id="clUsuario" label="teléfono" binding="#{usuario}" />
+
+					<h:outputLabel for="contrasena" value="Contraseña:" />
+					<p:password id="clContrasena" label="contraseña"
+						binding="#{contrasena}" />
+
+					<p:commandButton type="submit" value="Aceptar" ajax="true"
+					actionListener="#{clientesBean.insertarCliente(nombre.value,apellidos.value, direccion.value, usuario.value, contrasena.value)}"
+					oncomplete="cargaTerminada()" ></p:commandButton>
+				</h:panelGrid>
+			</p:dialog>
+
+		</h:form>
+
+		<h:panelGroup />
+	</ui:define>
 </ui:composition>

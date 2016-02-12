@@ -54,7 +54,7 @@ public class ClienteService {
 		while (cur.hasNext()) {
 			cl = new Cliente();
 			cur.next();
-			cl.setId(((Double)cur.curr().get("_id")).intValue());
+			cl.setId((Integer)cur.curr().get("_id"));
 			cl.setNombre((String) cur.curr().get("nombre"));
 			cl.setApellidos((String) cur.curr().get("apellidos"));
 			cl.setDireccion((String) cur.curr().get("direccion"));
@@ -85,7 +85,7 @@ public class ClienteService {
 		table.remove(new BasicDBObject().append("_id", id));
 	}
 
-	public void modificarAlumno(Cliente cl) {
+	public void modificarCliente(Cliente cl) {
 		DBCollection table = db.getCollection("clientes");
 		BasicDBObject client = new BasicDBObject();
 

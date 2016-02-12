@@ -59,6 +59,8 @@
 			<artifactId>primefaces</artifactId>
 			<version>5.3</version>
 		</dependency>
+		
+		
 
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -106,6 +108,12 @@
 			<artifactId>jsr250-api</artifactId>
 			<version>1.0</version>
 		</dependency>
+		<dependency>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>south-street</artifactId>
+			<version>1.0.6</version>
+		</dependency>
+		
 	</dependencies>
 
 	<repositories>
@@ -122,6 +130,12 @@
 			<id>maven2-repository.dev.java.net</id>
 			<name>Java.net Repository for Maven</name>
 			<url>http://download.java.net/maven/2</url>
+		</repository>
+		
+		<repository>
+			<id>prime-repo</id>
+			<name>Prime Repo</name>
+			<url>http://repository.primefaces.org</url>
 		</repository>
 	</repositories>
 
