@@ -7,15 +7,16 @@
 	template="/WEB-INF/templates/template.xhtml">
 
 	<ui:define name="content">
-
-		<p:inputText style="margin-right:2%; float: right"
-			placeholder="Buscar">
-			<p:ajax />
+<h:form>
+		<p:inputText id="busqueda"
+			style="float: right; margin-left:7% "
+			placeholder="Busqueda" binding="#{busqueda}">
+			<p:ajax event="keyup" update="tablaClientes" listener="#{clientesBean.cargarTabla(busqueda.value)}"/>
 		</p:inputText>
-		<h:form>
-		<p:remoteCommand name="cargaTerminada" action="#{clientesBean.clientes.clientes}" update="tablaClientes" />
-		<p:dataTable id="tablaClientes" var="client"
-			value="#{clientesBean.clientes.clientes}" rows="15" paginator="true"
+		</h:form>
+		<p:dataTable id="tablaClientes" var="client" ajaxRendered="true"
+			reflow="true" value="#{clientesBean.clientes.clientes}" rows="15"
+			paginator="true"
 			paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 			rowsPerPageTemplate="15, 20, 30">
 			<p:column headerText="Id">
@@ -41,19 +42,16 @@
 			<p:column headerText="Opciones">
 				<p:commandButton type="submit"
 					actionListener="#{clientesBean.eliminarCliente(client)}"
-					icon="ui-icon-trash" style="float: center;" />
-				<p:commandButton type="submit"
-					actionListener="#{clientesBean.eliminarCliente(client)}"
+					update="tablaClientes" icon="ui-icon-trash" style="float: center;" />
+				<p:commandButton type="submit" onclick="PF('insertar').show();"
 					icon="ui-icon-pencil" style="float: center;" />
-				<p:commandButton type="submit"
-					actionListener="#{clientesBean.eliminarCliente(client)}"
+				<p:commandButton type="submit" update="tablaClientes"
 					icon="ui-icon-search" style="float: center;" />
 			</p:column>
 		</p:dataTable>
-		</h:form>
 		<h:form>
 
-			<p:commandButton value="Añadir Cliente" 
+			<p:commandButton value="Añadir Cliente"
 				onclick="PF('insertar').show();" type="button" icon="ui-icon-plus"
 				style="float: right; margin-top:2%;" />
 			<p:dialog header="Nuevo cliente" widgetVar="insertar"
@@ -78,8 +76,9 @@
 						binding="#{contrasena}" />
 
 					<p:commandButton type="submit" value="Aceptar" ajax="true"
-					actionListener="#{clientesBean.insertarCliente(nombre.value,apellidos.value, direccion.value, usuario.value, contrasena.value)}"
-					oncomplete="cargaTerminada()" ></p:commandButton>
+						actionListener="#{clientesBean.insertarCliente(nombre.value,apellidos.value, direccion.value, usuario.value, contrasena.value)}"
+						update="tablaClientes">
+					</p:commandButton>
 				</h:panelGrid>
 			</p:dialog>
 

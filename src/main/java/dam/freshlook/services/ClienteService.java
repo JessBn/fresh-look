@@ -2,14 +2,17 @@ package dam.freshlook.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
+import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 
 import dam.freshlook.pojos.Cliente;
@@ -36,15 +39,30 @@ public class ClienteService {
 	      return instance;
 	}
 
-	public List<Cliente> cargarClientes(String campo, String busqueda) {
+	public List<Cliente> cargarClientes(String busqueda) {
 		Cliente cl = new Cliente();
 		DBCursor cur;
 		DBCollection table = db.getCollection("clientes");
 		List<Cliente> clientes = new ArrayList<Cliente>();
 
 		if (!busqueda.equals("")) {
-			BasicDBObject query = new BasicDBObject();
-			query.put(campo, busqueda);
+			Pattern regex = Pattern.compile(busqueda);
+			BasicDBList or = new BasicDBList();
+			try{
+				DBObject clause1 = new BasicDBObject("_id", Integer.parseInt(busqueda));  
+				or.add(clause1);
+			}catch(NumberFormatException e){}
+			
+			DBObject clause2 = new BasicDBObject("nombre", regex);
+			DBObject clause3 = new BasicDBObject("apellidos", regex);
+			DBObject clause4 = new BasicDBObject("direccion", regex);
+			DBObject clause5 = new BasicDBObject("usuario", regex);
+			
+			or.add(clause2);
+			or.add(clause3);
+			or.add(clause4);
+			or.add(clause5);
+			DBObject query = new BasicDBObject("$or", or);
 			cur = table.find(query);
 		} else {
 			cur = table.find();
@@ -80,7 +98,6 @@ public class ClienteService {
 	}
 
 	public void eliminarCliente(int id) {
-		System.out.println("se procede a eliminar el cliente: "+id);
 		DBCollection table = db.getCollection("clientes");
 		table.remove(new BasicDBObject().append("_id", id));
 	}
