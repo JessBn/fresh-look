@@ -3,13 +3,15 @@ package dam.freshlook.pojos;
 import java.util.Date;
 
 public class Cita {
-	Date fecha;
+	int id;
+	String fecha;
 	String telefono;
 	String nombre;
 	String servicio;
 	String sala;
-	public Cita(Date fecha, String telefono, String nombre, String servicio, String sala) {
+	public Cita(int id, String fecha, String telefono, String nombre, String servicio, String sala) {
 		super();
+		this.id =id;
 		this.fecha = fecha;
 		this.telefono = telefono;
 		this.nombre = nombre;
@@ -19,10 +21,18 @@ public class Cita {
 	public Cita() {
 		super();
 	}
-	public Date getFecha() {
+	
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getFecha() {
 		return fecha;
 	}
-	public void setFecha(Date fecha) {
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
 	public String getTelefono() {

@@ -3,8 +3,8 @@ package dam.freshlook.pojos;
 public class Servicio extends Vendible{
 	float duracion;
 
-	public Servicio(String nombre, String descripcion, float precio, String tipo, float duracion) {
-		super(nombre, descripcion, precio, tipo);
+	public Servicio(int id, String nombre, String descripcion, float precio, String tipo, float duracion) {
+		super(id, nombre, descripcion, precio, tipo);
 		this.duracion = duracion;
 	}
 

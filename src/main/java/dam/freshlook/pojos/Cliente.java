@@ -1,6 +1,8 @@
  package dam.freshlook.pojos;
 
-public class Cliente {
+import java.io.Serializable;
+
+public class Cliente implements Serializable{
 	int id;
 	String nombre;
 	String apellidos;

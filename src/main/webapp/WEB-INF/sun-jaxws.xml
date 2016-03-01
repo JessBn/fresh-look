@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoints xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime"
+	version="2.0">
+	<endpoint name="ClientesWs" implementation="dam.freshlook.services.ClienteWS"
+		url-pattern="/clientes" />
+	<endpoint name="ProductosWs" implementation="dam.freshlook.services.ProductoWS"
+		url-pattern="/productos" />
+	<endpoint name="ServiciosWs" implementation="dam.freshlook.services.ServicioWS"
+		url-pattern="/servicios" />
+	<endpoint name="CitasWs" implementation="dam.freshlook.services.CitaWS"
+		url-pattern="/citas" />
+</endpoints>

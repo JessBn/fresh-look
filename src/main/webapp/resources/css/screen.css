@@ -42,3 +42,7 @@ body {
 	border-top: 1px solid #c0c0c0;
 	clear : both;
 }
+
+.ui-row-editor{
+    display: inline;
+}

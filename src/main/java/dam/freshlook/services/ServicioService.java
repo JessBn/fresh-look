@@ -9,32 +9,26 @@ import javax.faces.bean.ManagedBean;
 
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
 
-import javax.jws.*;
+import dam.freshlook.pojos.Servicio;
 
-import dam.freshlook.pojos.Cliente;
-
-
-@ManagedBean(name = "clienteService")
+@ManagedBean(name = "servicioService")
 @ApplicationScoped
-
-public class ClienteService {
-	private static ClienteService instance = null;
+public class ServicioService {
+	private static ServicioService instance = null;
 	private Conexion conn;
 	private DBCollection table;
-	public ClienteService() {
+	public ServicioService() {
 		conn = Conexion.getInstance();
-		table = conn.getDb().getCollection("clientes");
+		table = conn.getDb().getCollection("servicios");
 	}
 	
-	public static ClienteService getInstance(){
+	public static ServicioService getInstance(){
 		if(instance == null) {
-	         instance = new ClienteService();
+	         instance = new ServicioService();
 	      }
 	      return instance;
 	}
@@ -42,10 +36,10 @@ public class ClienteService {
 	
 	
 	
-	public List<Cliente> cargarClientes(String busqueda) {
-		Cliente cl = new Cliente();
+	public List<Servicio> cargarServicios(String busqueda) {
+		Servicio cl = new Servicio();
 		DBCursor cur;
-		List<Cliente> clientes = new ArrayList<Cliente>();
+		List<Servicio> productos = new ArrayList<Servicio>();
 
 		if (!busqueda.equals("")) {
 			Pattern regex = Pattern.compile(busqueda);
@@ -56,14 +50,16 @@ public class ClienteService {
 			}catch(NumberFormatException e){}
 			
 			DBObject clause2 = new BasicDBObject("nombre", regex);
-			DBObject clause3 = new BasicDBObject("apellidos", regex);
-			DBObject clause4 = new BasicDBObject("direccion", regex);
-			DBObject clause5 = new BasicDBObject("usuario", regex);
+			DBObject clause3 = new BasicDBObject("descripcion", regex);
+			DBObject clause4 = new BasicDBObject("precio", Float.parseFloat(busqueda));
+			DBObject clause5 = new BasicDBObject("tipo", regex);
+			DBObject clause6 = new BasicDBObject("duracion", Float.parseFloat(busqueda));
 			
 			or.add(clause2);
 			or.add(clause3);
 			or.add(clause4);
 			or.add(clause5);
+			or.add(clause6);
 			DBObject query = new BasicDBObject("$or", or);
 			cur = table.find(query);
 		} else {
@@ -72,47 +68,44 @@ public class ClienteService {
 
 		int rows = cur.count();
 		while (cur.hasNext()) {
-			cl = new Cliente();
+			cl = new Servicio();
 			cur.next();
 			cl.setId((Integer)cur.curr().get("_id"));
 			cl.setNombre((String) cur.curr().get("nombre"));
-			cl.setApellidos((String) cur.curr().get("apellidos"));
-			cl.setDireccion((String) cur.curr().get("direccion"));
-			cl.setUsuario((String) cur.curr().get("usuario"));
-			cl.setContrasena((String) cur.curr().get("contrasena"));
-			clientes.add(cl);
+			cl.setDescripcion((String) cur.curr().get("descripcion"));
+			cl.setPrecio((Float) cur.curr().get("precio"));
+			cl.setTipo((String) cur.curr().get("tipo"));
+			cl.setDuracion((Float) cur.curr().get("duracion"));
+			productos.add(cl);
 		}
-		return clientes;
+		return productos;
 	}
 
-	public void insertarCliente(Cliente cl) {
+	public void insertarServicio(Servicio cl) {
 		BasicDBObject client = new BasicDBObject();
 
 		client.put("_id", cl.getId());
 		client.put("nombre", cl.getNombre());
-		client.put("apellidos", cl.getApellidos());
-		client.put("direccion", cl.getDireccion());
-		client.put("usuario", cl.getUsuario());
-		client.put("contrasena", cl.getContrasena());
+		client.put("descripcion", cl.getDescripcion());
+		client.put("precio", cl.getPrecio());
+		client.put("tipo", cl.getTipo());
+		client.put("duracion", cl.getDuracion());
 		table.insert(client);
 	}
 
-	public void eliminarCliente(int id) {
+	public void eliminarServicio(int id) {
 		table.remove(new BasicDBObject().append("_id", id));
 	}
 
-	public void modificarCliente(Cliente cl) {
+	public void modificarServicio(Servicio cl) {
 		BasicDBObject client = new BasicDBObject();
 
 		client.put("_id", cl.getId());
 		client.put("nombre", cl.getNombre());
-		client.put("apellidos", cl.getApellidos());
-		client.put("direccion", cl.getDireccion());
-		client.put("usuario", cl.getUsuario());
-		client.put("contrasena", cl.getContrasena());
+		client.put("apellidos", cl.getDescripcion());
+		client.put("direccion", cl.getPrecio());
+		client.put("usuario", cl.getTipo());
+		client.put("duracion", cl.getDuracion());
 		table.update(new BasicDBObject("_id", cl.getId()),client);
 	}
-
-
-
 }

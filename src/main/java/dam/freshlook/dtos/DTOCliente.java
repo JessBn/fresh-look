@@ -6,7 +6,7 @@ import java.util.List;
 import dam.freshlook.pojos.Cliente;
 
 public class DTOCliente {
-	List<Cliente> clientes = new ArrayList<Cliente>();
+	static List<Cliente> clientes = new ArrayList<Cliente>();
 
 	public DTOCliente(ArrayList<Cliente> clientes) {
 		this.clientes = clientes;
@@ -24,12 +24,12 @@ public class DTOCliente {
 		this.clientes = clientes;
 	}
 
-	public int getNuevoId() {
+	public static int getNuevoId() {
 		int mayor;
 		if (clientes.size() == 0) {
 			return 1;
 		} else {
-			mayor = this.clientes.get(0).getId();
+			mayor = clientes.get(0).getId();
 			for (int i = 0; i < clientes.size(); i++) {
 				if (clientes.get(i).getId() > mayor) {
 					mayor = clientes.get(i).getId();

@@ -1,12 +1,14 @@
 package dam.freshlook.pojos;
 
 public class Vendible {
+	int id;
 	String nombre;
 	String descripcion;
 	float precio;
 	String tipo;
-	public Vendible(String nombre, String descripcion, float precio, String tipo) {
+	public Vendible(int id, String nombre, String descripcion, float precio, String tipo) {
 		super();
+		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.precio = precio;
@@ -14,6 +16,14 @@ public class Vendible {
 	}
 	public Vendible() {
 		super();
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getNombre() {
 		return nombre;

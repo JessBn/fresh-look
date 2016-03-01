@@ -7,8 +7,9 @@ public class Producto extends Vendible{
 		super();
 	}
 
-	public Producto(String nombre, String descripcion, float precio, String tipo) {
-		super(nombre, descripcion, precio, tipo);
+	public Producto(int id, String nombre, String descripcion, float precio, String tipo, int cantidad) {
+		super(id, nombre, descripcion, precio, tipo);
+		this.cantidad = cantidad;
 	}
 
 	public int getCantidad() {
@@ -21,9 +22,11 @@ public class Producto extends Vendible{
 
 	@Override
 	public String toString() {
-		return "Productos [cantidad=" + cantidad + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precio="
-				+ precio + ", tipo=" + tipo + "]";
+		return "Producto [cantidad=" + cantidad + ", id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion
+				+ ", precio=" + precio + ", tipo=" + tipo + "]";
 	}
+
+
 	
 	
 }
