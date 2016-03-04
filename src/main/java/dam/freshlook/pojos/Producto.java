@@ -1,6 +1,8 @@
 package dam.freshlook.pojos;
 
-public class Producto extends Vendible{
+import java.io.Serializable;
+
+public class Producto extends Vendible implements Serializable{
 	int cantidad;
 
 	public Producto() {

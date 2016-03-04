@@ -49,17 +49,15 @@ public class CitaService {
 				or.add(clause1);
 			}catch(NumberFormatException e){}
 			
-			DBObject clause2 = new BasicDBObject("fecha", regex);
-			DBObject clause3 = new BasicDBObject("telefono", regex);
-			DBObject clause4 = new BasicDBObject("nombre", regex);
-			DBObject clause5 = new BasicDBObject("servicio", regex);
-			DBObject clause6 = new BasicDBObject("sala", regex);
+			DBObject clause2 = new BasicDBObject("hora", regex);
+			DBObject clause3 = new BasicDBObject("fecha", regex);
+			DBObject clause4 = new BasicDBObject("usuario", regex);
+			DBObject clause5 = new BasicDBObject("urlFoto", regex);
 			
 			or.add(clause2);
 			or.add(clause3);
 			or.add(clause4);
 			or.add(clause5);
-			or.add(clause6);
 			DBObject query = new BasicDBObject("$or", or);
 			cur = table.find(query);
 		} else {
@@ -71,11 +69,10 @@ public class CitaService {
 			cl = new Cita();
 			cur.next();
 			cl.setId((Integer)cur.curr().get("_id"));
+			cl.setHora((String) cur.curr().get("hora"));
 			cl.setFecha((String) cur.curr().get("fecha"));
-			cl.setTelefono((String) cur.curr().get("telefono"));
-			cl.setNombre((String) cur.curr().get("nombre"));
-			cl.setServicio((String) cur.curr().get("servicio"));
-			cl.setSala((String) cur.curr().get("sala"));
+			cl.setUsuario((String) cur.curr().get("usuario"));
+			cl.setUrlFoto((String) cur.curr().get("urlFoto"));
 			Citas.add(cl);
 		}
 		return Citas;
@@ -85,11 +82,10 @@ public class CitaService {
 		BasicDBObject client = new BasicDBObject();
 
 		client.put("_id", cl.getId());
+		client.put("hora", cl.getHora());
 		client.put("fecha", cl.getFecha());
-		client.put("telefono", cl.getTelefono());
-		client.put("nombre", cl.getNombre());
-		client.put("servicio", cl.getServicio());
-		client.put("sala", cl.getSala());
+		client.put("usuario", cl.getUsuario());
+		client.put("urlFoto", cl.getUrlFoto());
 		table.insert(client);
 	}
 
@@ -101,11 +97,10 @@ public class CitaService {
 		BasicDBObject client = new BasicDBObject();
 
 		client.put("_id", cl.getId());
+		client.put("hora", cl.getHora());
 		client.put("fecha", cl.getFecha());
-		client.put("telefono", cl.getTelefono());
-		client.put("nombre", cl.getNombre());
-		client.put("servicio", cl.getServicio());
-		client.put("sala", cl.getSala());
+		client.put("usuario", cl.getUsuario());
+		client.put("urlFoto", cl.getUrlFoto());
 		table.update(new BasicDBObject("_id", cl.getId()),client);
 	}
 }

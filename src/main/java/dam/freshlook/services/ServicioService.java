@@ -46,20 +46,20 @@ public class ServicioService {
 			BasicDBList or = new BasicDBList();
 			try{
 				DBObject clause1 = new BasicDBObject("_id", Integer.parseInt(busqueda));  
+				DBObject clause4 = new BasicDBObject("precio", Float.parseFloat(busqueda));
+				DBObject clause6 = new BasicDBObject("duracion", Float.parseFloat(busqueda));
 				or.add(clause1);
+				or.add(clause4);
+				or.add(clause6);
 			}catch(NumberFormatException e){}
 			
 			DBObject clause2 = new BasicDBObject("nombre", regex);
 			DBObject clause3 = new BasicDBObject("descripcion", regex);
-			DBObject clause4 = new BasicDBObject("precio", Float.parseFloat(busqueda));
 			DBObject clause5 = new BasicDBObject("tipo", regex);
-			DBObject clause6 = new BasicDBObject("duracion", Float.parseFloat(busqueda));
 			
 			or.add(clause2);
 			or.add(clause3);
-			or.add(clause4);
 			or.add(clause5);
-			or.add(clause6);
 			DBObject query = new BasicDBObject("$or", or);
 			cur = table.find(query);
 		} else {

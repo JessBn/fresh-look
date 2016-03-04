@@ -12,8 +12,8 @@ public class ProductoWS {
 ProductoService service = ProductoService.getInstance();
 	
 	@WebMethod(operationName="cargarProductos")
-	public Producto[] cargarProductos(String busqueda) {
-		return (Producto[]) service.cargarProductos(busqueda).toArray();
+	public List<Producto> cargarProductos(String busqueda) {
+		return service.cargarProductos(busqueda);
 		
 	}
 	

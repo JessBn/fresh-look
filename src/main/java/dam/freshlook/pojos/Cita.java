@@ -4,30 +4,31 @@ import java.util.Date;
 
 public class Cita {
 	int id;
+	String hora;
 	String fecha;
-	String telefono;
-	String nombre;
-	String servicio;
-	String sala;
-	public Cita(int id, String fecha, String telefono, String nombre, String servicio, String sala) {
+	String usuario;
+	String urlFoto;
+	public Cita(int id, String hora, String fecha, String usuario, String urlFoto) {
 		super();
-		this.id =id;
+		this.id = id;
+		this.hora = hora;
 		this.fecha = fecha;
-		this.telefono = telefono;
-		this.nombre = nombre;
-		this.servicio = servicio;
-		this.sala = sala;
+		this.usuario = usuario;
+		this.urlFoto = urlFoto;
 	}
 	public Cita() {
-		super();
 	}
-	
-	
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public String getHora() {
+		return hora;
+	}
+	public void setHora(String hora) {
+		this.hora = hora;
 	}
 	public String getFecha() {
 		return fecha;
@@ -35,35 +36,24 @@ public class Cita {
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
-	public String getTelefono() {
-		return telefono;
+	public String getUsuario() {
+		return usuario;
 	}
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
-	public String getNombre() {
-		return nombre;
+	public String getUrlFoto() {
+		return urlFoto;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	public String getServicio() {
-		return servicio;
-	}
-	public void setServicio(String servicio) {
-		this.servicio = servicio;
-	}
-	public String getSala() {
-		return sala;
-	}
-	public void setSala(String sala) {
-		this.sala = sala;
+	public void setUrlFoto(String urlFoto) {
+		this.urlFoto = urlFoto;
 	}
 	@Override
 	public String toString() {
-		return "Cita [fecha=" + fecha + ", telefono=" + telefono + ", nombre=" + nombre + ", servicio=" + servicio
-				+ ", sala=" + sala + "]";
+		return "Cita [id=" + id + ", hora=" + hora + ", fecha=" + fecha + ", usuario=" + usuario + ", urlFoto="
+				+ urlFoto + "]";
 	}
+
 	
 	
 }

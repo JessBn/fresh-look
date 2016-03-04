@@ -6,21 +6,22 @@ import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 import dam.freshlook.pojos.Cita;
+import dam.freshlook.pojos.Cliente;
 
 @WebService
 public class CitaWS {
 CitaService service = CitaService.getInstance();
 	
 	@WebMethod(operationName="cargarCitas")
-	public Cita[] cargarCitas(String busqueda) {
-		return (Cita[]) service.cargarCitas(busqueda).toArray();
+	public List<Cita> cargarCitas(String busqueda) {
+		return service.cargarCitas(busqueda);
 		
 	}
 	
 	@WebMethod(operationName="insertarCita")
-	public void insertarCita(int id, String fecha, String telefono, String nombre, String servicio, String sala) {
+	public void insertarCita(int id, String hora, String fecha, String usuario, String urlFoto) {
 		
-		service.insertarCita(new Cita(id, fecha, telefono, nombre, servicio, sala));
+		service.insertarCita(new Cita(id, hora, fecha, usuario, urlFoto));
 		
 	}
 	
@@ -31,8 +32,8 @@ CitaService service = CitaService.getInstance();
 	}
 	
 	@WebMethod(operationName="modificarCita")
-	public void modificarCita(int id, String fecha, String telefono, String nombre, String servicio, String sala) {
-		service.modificarCita(new Cita(id, fecha, telefono, nombre, servicio, sala));
+	public void modificarCita(int id, String hora, String fecha, String usuario, String urlFoto) {
+		service.modificarCita(new Cita(id, hora, fecha, usuario, urlFoto));
 		
 	}
 }

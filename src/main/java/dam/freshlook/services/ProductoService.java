@@ -32,9 +32,6 @@ public class ProductoService {
 	      }
 	      return instance;
 	}
-
-	
-	
 	
 	public List<Producto> cargarProductos(String busqueda) {
 		Producto cl = new Producto();
@@ -46,20 +43,22 @@ public class ProductoService {
 			BasicDBList or = new BasicDBList();
 			try{
 				DBObject clause1 = new BasicDBObject("_id", Integer.parseInt(busqueda));  
+				DBObject clause4 = new BasicDBObject("precio", Float.parseFloat(busqueda));
+				DBObject clause6 = new BasicDBObject("cantidad", Integer.parseInt(busqueda));
+
+				or.add(clause6);
+				or.add(clause4);
 				or.add(clause1);
 			}catch(NumberFormatException e){}
 			
 			DBObject clause2 = new BasicDBObject("nombre", regex);
 			DBObject clause3 = new BasicDBObject("descripcion", regex);
-			DBObject clause4 = new BasicDBObject("precio", Float.parseFloat(busqueda));
 			DBObject clause5 = new BasicDBObject("tipo", regex);
-			DBObject clause6 = new BasicDBObject("cantidad", Integer.parseInt(busqueda));
+			
 			
 			or.add(clause2);
 			or.add(clause3);
-			or.add(clause4);
 			or.add(clause5);
-			or.add(clause6);
 			DBObject query = new BasicDBObject("$or", or);
 			cur = table.find(query);
 		} else {
@@ -73,9 +72,9 @@ public class ProductoService {
 			cl.setId((Integer)cur.curr().get("_id"));
 			cl.setNombre((String) cur.curr().get("nombre"));
 			cl.setDescripcion((String) cur.curr().get("descripcion"));
-			cl.setPrecio((Float) cur.curr().get("precio"));
+			cl.setPrecio(Float.valueOf((String)cur.curr().get("precio")));
 			cl.setTipo((String) cur.curr().get("tipo"));
-			cl.setCantidad((int) cur.curr().get("cantidad"));
+			cl.setCantidad(Integer.valueOf((String)cur.curr().get("cantidad")));
 			productos.add(cl);
 		}
 		return productos;

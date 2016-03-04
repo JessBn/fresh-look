@@ -18,6 +18,7 @@ import javax.servlet.ServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.WebAttributes;
 
 @ManagedBean(name="loginController")
@@ -43,6 +44,7 @@ public class LoginBean implements PhaseListener {
 
 		dispatcher.forward((ServletRequest) context.getRequest(),
 				(ServletResponse) context.getResponse());
+		SecurityContextHolder.getContext().getAuthentication().getName();
 
 		FacesContext.getCurrentInstance().responseComplete();
 

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
+import dam.freshlook.pojos.Cita;
 import dam.freshlook.pojos.Servicio;
 
 @WebService
@@ -12,8 +13,8 @@ public class ServicioWS {
 ServicioService service = ServicioService.getInstance();
 	
 	@WebMethod(operationName="cargarServicios")
-	public Servicio[] cargarServicios(String busqueda) {
-		return (Servicio[]) service.cargarServicios(busqueda).toArray();
+	public List<Servicio> cargarServicios(String busqueda) {
+		return service.cargarServicios(busqueda);
 		
 	}
 	
