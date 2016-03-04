@@ -13,24 +13,24 @@
 <h:body>
 	<h:panelGroup id="page" layout="block">
 		<h:panelGroup id="header" layout="block">
-		<img src="resources/img/logo.png"/>
+		<img src="#{request.contextPath}/resources/img/logo.png"/>
 			<h:form>
 				<p:menubar styleClass="menu">
 					
-					<p:menuitem value="Inicio" url="protected.jsf" icon="ui-icon-home" />
+					<p:menuitem value="Inicio" url="/protected/protected.jsf" icon="ui-icon-home" />
 
 					<p:submenu label="Clientes" icon="ui-icon-person">
-						<p:menuitem value="Lista clientes" url="clientes.jsf"
+						<p:menuitem value="Lista clientes" url="/protected/clientes.jsf"
 							icon="ui-icon-male" />
 						<p:menuitem value="Añadir cliente" url="#"
 							icon="ui-icon-plus-squaredw" />
 					</p:submenu>
 
-					<p:menuitem value="Ventas" icon="ui-icon-suitcase" url="ventas.jsf" />
+					<p:menuitem value="Ventas" icon="ui-icon-suitcase" url="/protected/ventas.jsf" />
 					<p:submenu label="Productos" icon="ui-icon-cart">
-						<p:menuitem value="Lista productos" url="productos.jsf"
+						<p:menuitem value="Lista productos" url="/protected/productos.jsf"
 							icon="ui-icon-euro" />
-						<p:menuitem value="Añadir Stock" url="anadirStock.jsf"
+						<p:menuitem value="Añadir Stock" url="/protected/anadirStock.jsf"
 							icon="ui-icon-euro" />
 					</p:submenu>
 

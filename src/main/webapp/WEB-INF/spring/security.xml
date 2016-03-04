@@ -7,7 +7,7 @@
                         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
 
     <http use-expressions="true">
-        <intercept-url pattern="/protected.jsf" access="isAuthenticated()" />
+        <intercept-url pattern="/protected/**" access="isAuthenticated()" />
         <intercept-url pattern="/**" access="permitAll()" />
 	
 		<!-- Custom login page -->
