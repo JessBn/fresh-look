@@ -73,9 +73,9 @@ public class ServicioService {
 			cl.setId((Integer)cur.curr().get("_id"));
 			cl.setNombre((String) cur.curr().get("nombre"));
 			cl.setDescripcion((String) cur.curr().get("descripcion"));
-			cl.setPrecio((Float) cur.curr().get("precio"));
+			cl.setPrecio(Float.valueOf((String)cur.curr().get("precio")));
 			cl.setTipo((String) cur.curr().get("tipo"));
-			cl.setDuracion((Float) cur.curr().get("duracion"));
+			cl.setDuracion(Float.valueOf((String)cur.curr().get("duracion")));
 			productos.add(cl);
 		}
 		return productos;

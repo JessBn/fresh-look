@@ -1,6 +1,7 @@
 package dam.freshlook.pojos;
 
 public class LineaVenta {
+	int id;
 	Vendible vendible;
 	int cantidad;
 	public LineaVenta(Vendible vendible, int cantidad) {
@@ -26,6 +27,12 @@ public class LineaVenta {
 	@Override
 	public String toString() {
 		return "LineaVenta [vendible=" + vendible + ", cantidad=" + cantidad + "]";
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	
