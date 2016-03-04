@@ -15,9 +15,7 @@ import org.springframework.security.core.codec.Hex;
 import dam.freshlook.dtos.DTOCliente;
 import dam.freshlook.pojos.Cliente;
 import dam.freshlook.services.ClienteService;
-import dam.freshlook.services.ClienteWS;
 
-import javax.xml.ws.Endpoint;
 
 
 @ManagedBean(name = "clientesBean")

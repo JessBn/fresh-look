@@ -5,6 +5,9 @@ import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 
 public class Conexion {
+	private static final String BD_IP = "localhost";
+
+	
 	private static Conexion instance = null;
 	MongoClient mongo;
 	DB db;
@@ -30,7 +33,7 @@ public class Conexion {
 
 	private static MongoClient crearConexion() {
 		MongoClient mongo = null;
-		mongo = new MongoClient("90.74.183.48", 27017);
+		mongo = new MongoClient(BD_IP, 27017);
 		return mongo;
 	}
 }

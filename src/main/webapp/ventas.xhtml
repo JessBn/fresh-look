@@ -7,21 +7,33 @@
 	template="/WEB-INF/templates/template.xhtml">
 
 	<ui:define name="content">
+
+
 		<h:form>
-			<p:inputText id="busqueda" style="float: right; margin-left:7% "
-				placeholder="Busqueda" binding="#{busqueda}">
+			<p:inputText id="busqueda" placeholder="Busqueda de productos"
+				binding="#{busqueda}"
+				style="display:inline !important; float:left !important; width:48% !important;">
 				<p:ajax event="keyup" update="tablaProductos"
-					listener="#{clientesBean.cargarTabla(busqueda.value)}" />
+					listener="#{ventasBean.cargarTablaProductos(busqueda.value)}" />
+			</p:inputText>
+		</h:form>
+		<h:form>
+			<p:inputText id="busqueda1" placeholder="Busqueda de servicios"
+				binding="#{busqueda1}"
+				style="display:inline !important; float:right !important; width:48% !important;">
+				<p:ajax event="keyup" update="tablaServicios"
+					listener="#{ventasBean.cargarTablaServicios(busqueda1.value)}" />
 			</p:inputText>
 		</h:form>
 		<p:dataTable id="tablaProductos" var="product" ajaxRendered="true"
+			style="display:inline !important; float:left !important; width:49% !important;"
 			editable="true" reflow="true"
 			value="#{ventasBean.productos.productos}" rows="15" paginator="true"
 			paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 			rowsPerPageTemplate="15, 20, 30">
 			<f:facet name="header">
-           Ventas
-       		</f:facet>
+           Productos
+			</f:facet>
 			<p:column headerText="Id">
 				<h:outputText value="#{product.id}" />
 			</p:column>
@@ -43,14 +55,41 @@
 			</p:column>
 
 			<p:column headerText="Opciones">
-				<p:commandButton type="submit"
-					actionListener="#{clientesBean.eliminarCliente(client)}"
-					update="tablaClientes" icon="ui-icon-trash" style="float: center;" />
+
+			</p:column>
+		</p:dataTable>
+		<p:dataTable id="tablaServicios" var="servicio" ajaxRendered="true"
+			style="display:inline !important; float:right !important; width:49% !important;"
+			editable="true" reflow="true"
+			value="#{ventasBean.servicios.servicios}" rows="15" paginator="true"
+			paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="15, 20, 30">
+			<f:facet name="header">
+           Servicios
+			</f:facet>
+			<p:column headerText="Id">
+				<h:outputText value="#{servicio.id}" />
+			</p:column>
+
+			<p:column headerText="Nombre">
+				<h:outputText value="#{servicio.nombre}" />
+			</p:column>
+
+			<p:column headerText="Descripcion">
+				<h:outputText value="#{servicio.descripcion}" />
+			</p:column>
+
+			<p:column headerText="Precio">
+				<h:outputText value="#{servicio.precio}" />
+			</p:column>
+
+			<p:column headerText="Opciones">
+
 			</p:column>
 		</p:dataTable>
 		<h:form>
 
-			<p:commandButton value="Añadir Cliente"
+			<p:commandButton value="Realizar venta"
 				onclick="PF('insertar').show();" type="button" icon="ui-icon-plus"
 				style="float: right; margin-top:2%;" />
 
