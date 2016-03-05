@@ -9,8 +9,9 @@
 	template="/WEB-INF/templates/logofftemplate.xhtml">
 	<ui:define name="content">
 		<h:body>
-
-			<h:form id="loginForm" prependId="false">
+			
+			<div style="width:50%; margin-left:auto; margin-right:auto">
+			<h:form id="loginForm" prependId="false" style="margin-left:30%; margin-top:30%;">
 				<!-- Messages must be global here, to show bad credentials -->
 				<h:messages globalOnly="true" />
 
@@ -24,15 +25,15 @@
 					<p:password id="j_password" label="password" required="true" />
 					<h:message for="j_password" display="text" style="color:red" />
 
-					<h:outputLabel for="_spring_security_remember_me"
-						value="Remember me: " />
-					<h:selectBooleanCheckbox id="_spring_security_remember_me" />
+					
 				</h:panelGrid>
 
 				<p:commandButton type="submit" value="Login"
 					actionListener="#{loginController.doLogin}" ajax="false" />
 
 			</h:form>
+			</div>
+			
 		</h:body>
 	</ui:define>
 </ui:composition>

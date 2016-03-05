@@ -6,9 +6,26 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/template.xhtml">
 	<ui:define name="content">
-        <p:commandButton value="Ir a compras" id="irCompra" styleClass="ui-priority-primary" />
-        <p:commandButton value="Ir a clientes" id="irCliente" styleClass="ui-priority-primary" />
-        <p:commandButton value="Ir a productos" id="irProducto" styleClass="ui-priority-primary" />
-        <p:commandButton value="Ir a datos del usuario" id="irUsuario" styleClass="ui-priority-primary" />
+	<div style="text-align:center">
+	<div style="display:inline;">   
+		<p:commandButton value="Ir a compras" id="irCompra" styleClass="ui-priority-primary" style="
+        	margin-top: 5%;
+        	margin-bottom: 5%;
+        	margin-right: 5%;
+		    width: 202px;
+		    height: 202px;" />
+        <p:commandButton value="Ir a clientes" id="irCliente" styleClass="ui-priority-primary" style="
+		    margin-right: 5%;
+		    width: 202px;
+		    height: 202px;" />
+        <p:commandButton value="Ir a productos" id="irProducto" styleClass="ui-priority-primary" style="
+		    margin-right: 5%;
+		    width: 202px;
+		    height: 202px;"/>
+        <p:commandButton value="Ir a datos del usuario" id="irUsuario" styleClass="ui-priority-primary" style="
+		    width: 202px;
+		    height: 202px;" />
+	</div>
+	</div>
 	</ui:define>
 </ui:composition>
