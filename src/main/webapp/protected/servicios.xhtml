@@ -89,7 +89,9 @@
 					update="tablaServicios" icon="ui-icon-trash" style="float: center;" />
 
 				<p:commandButton type="submit" update="tablaServicios"
-					icon="ui-icon-search" style="float: center;" />
+					actionListener="#{serviciosBean.setServicio(prod)}"
+					icon="ui-icon-search" style="float: center;" 
+					onclick="PF('modificar').show();"/>
 			</p:column>
 		</p:dataTable>
 		<h:form>
@@ -97,8 +99,7 @@
 			<p:commandButton value="Añadir Servicio"
 				onclick="PF('insertar').show();" type="button" icon="ui-icon-plus"
 				style="float: right; margin-top:2%;" />
-			<p:dialog header="Nuevo servicio" widgetVar="insertar"
-				focus="clNombre">
+			<p:dialog header="Nuevo servicio" widgetVar="insertar">
 				<h:panelGrid columns="2" cellpadding="5">
 					<h:outputLabel for="nombre" value="Nombre:" />
 					<p:inputText id="clNombre" label="nombre" binding="#{nombre}" />
@@ -124,6 +125,32 @@
 
 		</h:form>
 
+		<h:form>
+			<p:dialog header="Modificar servicio" widgetVar="modificar">
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputLabel for="nombre" value="Nombre:" />
+					<p:inputText id="clNombreModificar" label="nombre" binding="#{nombre}" />
+
+					<h:outputLabel for="descripcion" value="Descripción:" />
+					<p:inputText id="clDescripcionModificar" label="descripcion"
+						binding="#{descripcion}" />
+
+					<h:outputLabel for="precio" value="Precio:" />
+					<p:inputText id="clPrecioModificar" label="precio"
+						binding="#{precio}" />
+
+					<h:outputLabel for="duracion" value="Duración" />
+					<p:inputText id="clDuracionModificar" label="duracion"
+						binding="#{duracion}" />
+
+					<p:commandButton type="submit" value="Aceptar" ajax="true"
+						actionListener="#{serviciosBean.modificarServicio(nombre.value, descripcion.value, precio.value, duracion.value)}"
+						update="tablaServicios" onclick="PF('modificar').hide();">
+					</p:commandButton>
+				</h:panelGrid>
+			</p:dialog>
+		</h:form>
+			
 		<h:panelGroup />
 	</ui:define>
 </ui:composition>

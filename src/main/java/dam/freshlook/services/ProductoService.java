@@ -97,6 +97,7 @@ public class ProductoService {
 	}
 
 	public void modificarProducto(Producto cl) {
+		DBObject busqueda = new BasicDBObject("_id", cl.getId());
 		BasicDBObject client = new BasicDBObject();
 
 		client.put("_id", cl.getId());
@@ -106,5 +107,8 @@ public class ProductoService {
 		client.put("tipo", cl.getTipo());
 		client.put("cantidad", cl.getCantidad());
 		table.update(new BasicDBObject("_id", cl.getId()),client);
+		// Los otros 2 parámetros (el 3º y 4º) son los parámetros de Upsert (si el campo existe se actualiza y sino se crea) y 
+		// Multiple (si se aplica la modificación a todos los documentos o solo al primero que encuentra)
+		table.update(busqueda, client, true, false);
 	}
 }

@@ -98,14 +98,18 @@ public class ServicioService {
 	}
 
 	public void modificarServicio(Servicio cl) {
+		
+		DBObject busqueda = new BasicDBObject("_id", cl.getId());
 		BasicDBObject client = new BasicDBObject();
 
 		client.put("_id", cl.getId());
 		client.put("nombre", cl.getNombre());
-		client.put("apellidos", cl.getDescripcion());
-		client.put("direccion", cl.getPrecio());
-		client.put("usuario", cl.getTipo());
+		client.put("descripcion", cl.getDescripcion());
+		client.put("precio", cl.getPrecio());
+		client.put("tipo", cl.getTipo());
 		client.put("duracion", cl.getDuracion());
-		table.update(new BasicDBObject("_id", cl.getId()),client);
+		// Los otros 2 parámetros (el 3º y 4º) son los parámetros de Upsert (si el campo existe se actualiza y sino se crea) y 
+		// Multiple (si se aplica la modificación a todos los documentos o solo al primero que encuentra)
+		table.update(busqueda, client, true, false);
 	}
 }

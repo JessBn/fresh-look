@@ -20,7 +20,11 @@ import dam.freshlook.services.ProductoService;
 public class ProductosBean {
 	@ManagedProperty("#{productoService}")
 	private ProductoService service;
+	private Producto productoAux;
 	
+	public void setProducto(Producto p){
+		productoAux=p;
+	}
 
 	DTOProducto productos;
 
@@ -59,18 +63,19 @@ public class ProductosBean {
 		this.cargarTabla("");
 	}
 	
-	public void modificarProducto(int id, String nombre, String descripcion, String precio, String tipo, String cantidad){
+	public void modificarProducto(String nombre, String descripcion, String precio, String tipo, String cantidad){
 		Producto cl = new Producto();
 		System.out.println(cl);
-		cl.setId(id);
+		cl.setId(productoAux.getId());
 		cl.setNombre(nombre);
 		cl.setDescripcion(descripcion);
 		cl.setPrecio(Float.valueOf(precio));
 		cl.setTipo("producto");
 		cl.setCantidad(Integer.valueOf(cantidad));
-		this.service.insertarProducto(cl);
+		this.service.modificarProducto(cl);
 		this.cargarTabla("");
 	}
+	
 	public void onRowEdit(RowEditEvent event) {
         String producto= ((Producto) event.getObject()).getNombre();
         System.out.println(producto);
