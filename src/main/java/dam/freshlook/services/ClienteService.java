@@ -85,6 +85,7 @@ public class ClienteService {
 		return clientes;
 	}
 
+	
 	public void insertarCliente(Cliente cl) {
 		BasicDBObject client = new BasicDBObject();
 
@@ -97,11 +98,15 @@ public class ClienteService {
 		table.insert(client);
 	}
 
+	
 	public void eliminarCliente(int id) {
 		table.remove(new BasicDBObject().append("_id", id));
 	}
 
+	
 	public void modificarCliente(Cliente cl) {
+		
+		DBObject busqueda = new BasicDBObject("_id", cl.getId());
 		BasicDBObject client = new BasicDBObject();
 
 		client.put("_id", cl.getId());
@@ -110,7 +115,9 @@ public class ClienteService {
 		client.put("direccion", cl.getDireccion());
 		client.put("usuario", cl.getUsuario());
 		client.put("contrasena", cl.getContrasena());
-		table.update(new BasicDBObject("_id", cl.getId()),client);
+		// Los otros 2 parámetros (el 3º y 4º) son los parámetros de Upsert (si el campo existe se actualiza y sino se crea) y 
+		// Multiple (si se aplica la modificación a todos los documentos o solo al primero que encuentra)
+		table.update(busqueda, client, true, false);
 	}
 
 

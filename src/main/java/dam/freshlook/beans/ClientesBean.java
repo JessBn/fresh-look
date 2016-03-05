@@ -23,8 +23,11 @@ import dam.freshlook.services.ClienteService;
 public class ClientesBean implements Serializable {
 	@ManagedProperty("#{clienteService}")
 	private ClienteService service;
-	
+	private Cliente clienteAux;
 
+	public void setCliente(Cliente c){
+		clienteAux=c;
+	}
 	DTOCliente clientes;
 	
 	/**
@@ -82,16 +85,16 @@ public class ClientesBean implements Serializable {
 	 * @param usuario
 	 * @param contrasena
 	 */
-	public void modificarCliente(int id, String nombre, String apellidos, String direccion, String usuario, String contrasena){
+	public void modificarCliente(String nombre, String apellidos, String direccion, String usuario, String contrasena){
 		Cliente cl = new Cliente();
 		System.out.println(cl);
-		cl.setId(id);
+		cl.setId(clienteAux.getId());
 		cl.setNombre(nombre);
 		cl.setApellidos(apellidos);
 		cl.setDireccion(direccion);
 		cl.setUsuario(usuario);
-		cl.setContrasena(contrasena);
-		this.service.insertarCliente(cl);
+		cl.setContrasena(this.encriptar(contrasena));
+		this.service.modificarCliente(cl);
 		this.cargarTabla("");
 	}
 	
