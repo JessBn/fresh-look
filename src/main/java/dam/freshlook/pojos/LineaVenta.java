@@ -1,6 +1,8 @@
 package dam.freshlook.pojos;
 
-public class LineaVenta {
+import java.io.Serializable;
+
+public class LineaVenta implements Serializable{
 	int id;
 	Vendible vendible;
 	int cantidad;
@@ -28,7 +30,6 @@ public class LineaVenta {
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
-	
 	
 	public float getTotal() {
 		return total;

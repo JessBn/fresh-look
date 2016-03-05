@@ -22,7 +22,11 @@
 					<p:menuitem value="Clientes" url="/protected/clientes.jsf" icon="ui-icon-person" />
 
 
-					<p:menuitem value="Ventas" icon="ui-icon-suitcase" url="/protected/ventas.jsf" />
+					<p:submenu label="Ventas" icon="ui-icon-suitcase">
+						<p:menuitem value="Nueva Venta" url="/protected/ventas.jsf" icon="ui-icon-euro" />
+						
+						<p:menuitem value="Listado ventas" url="/protected/listadoventas.jsf" icon="ui-icon-euro" />
+					</p:submenu>
 					
 					<p:submenu label="Productos" icon="ui-icon-cart"  rendered="#{loginController.tieneRol('ROLE_SUPERVISOR')}">
 						<p:menuitem value="Lista productos" url="/protected/productos.jsf"  rendered="#{loginController.tieneRol('ROLE_SUPERVISOR')}"

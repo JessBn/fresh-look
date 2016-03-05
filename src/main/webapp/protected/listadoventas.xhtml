@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/template.xhtml">
+
+	<ui:define name="content">
+		<p:dataTable id="tablaVentas" var="venta" ajaxRendered="true"
+			editable="true" reflow="true"
+			value="#{listadoVentasBean.ventas.ventas}" rows="15" paginator="true"
+			paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="15, 20, 30">
+			<f:facet name="header">
+           Ventas
+       		</f:facet>
+			<p:column headerText="No. factura">
+				<h:outputText value="#{venta.n_factura}" />
+			</p:column>
+
+			<p:column headerText="Empleado">
+				<h:outputText value="#{venta.dni_empleado}" />
+			</p:column>
+
+			<p:column headerText="Fecha">
+				<h:outputText value="#{venta.fecha}" />
+			</p:column>
+
+			<p:column headerText="Total">
+				<h:outputText value="#{venta.total} €" />
+			</p:column>
+
+		</p:dataTable>
+		<h:panelGroup />
+	</ui:define>
+</ui:composition>
