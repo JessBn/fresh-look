@@ -10,6 +10,8 @@ import dam.freshlook.dtos.DTOLineaVenta;
 import dam.freshlook.dtos.DTOProducto;
 import dam.freshlook.dtos.DTOServicio;
 import dam.freshlook.pojos.Producto;
+import dam.freshlook.pojos.Servicio;
+import dam.freshlook.pojos.Vendible;
 import dam.freshlook.services.ProductoService;
 import dam.freshlook.services.ServicioService;
 
@@ -60,10 +62,38 @@ public class VentasBean implements Serializable {
 				productos.updateCantidadProducto(prod.getId(), -(cantidad));
 			}
 		}
-		
-		
+	}
+	
+	public void anadirServicioCarrito(Servicio prod, int cantidad){
+		if(cantidad<=0){
+			
+		}else{
+			lineas.anadirLinea(prod, cantidad);
+		}
 	}
 
+	public void restarVendibleCarrito(Vendible prod,int cantidad, int cantrest){
+		if(cantidad<=0){
+			
+		}else{
+			if (cantidad <= cantrest) {
+				if(prod.getTipo().equals("producto")){
+					lineas.eliminarLinea(prod.getId());
+					productos.updateCantidadProducto(prod.getId(), cantidad);
+				}else if(prod.getTipo().equals("servicio")){
+					lineas.eliminarLinea(prod.getId());
+				}
+			} else {
+				if(prod.getTipo().equals("producto")){
+					productos.updateCantidadProducto(prod.getId(), cantidad);
+					lineas.updateCantidad(prod.getId(), -(cantrest));
+				}else if(prod.getTipo().equals("servicio")){
+					lineas.updateCantidad(prod.getId(), -(cantrest));
+				}
+			}
+		}
+	}
+	
 	public ProductoService getProductoService() {
 		return productoService;
 	}

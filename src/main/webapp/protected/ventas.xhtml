@@ -78,15 +78,19 @@
 				<h:outputText value="#{servicio.nombre}" />
 			</p:column>
 
-
 			<p:column headerText="Precio">
 				<h:outputText value="#{servicio.precio}" />
 			</p:column>
 
 			<p:column headerText="Opciones">
+				<h:form>
+			<p:inputText id="cant1"
+				binding="#{cant1}" style="width:30px;">
+				</p:inputText>
 				<p:commandButton type="submit"
-					actionListener="#{ventasBean.anadirServicio(servicio)}"
-					update="tablaServicios" icon="ui-icon-plus" style="float: center;" />
+					actionListener="#{ventasBean.anadirServicioCarrito(servicio, cant1.value)}"
+					update="tablaServicios,tablaVentas" icon="ui-icon-plus" style="float: center;" />
+			</h:form>
 			</p:column>
 		</p:dataTable>
 		<p:dataTable id="tablaVentas" var="linea" ajaxRendered="true"
@@ -116,9 +120,14 @@
 			</p:column>
 
 			<p:column headerText="Opciones">
+			<h:form>
+			<p:inputText id="cant3"
+				binding="#{cant3}" style="width:30px;">
+				</p:inputText>
 				<p:commandButton type="submit"
-					actionListener="#{ventasBean.anadirServicio(servicio)}"
-					update="tablaVentas" icon="ui-icon-plus" style="float: center;" />
+					actionListener="#{ventasBean.restarVendibleCarrito(linea.vendible, linea.cantidad, cant3.value)}"
+					update="tablaVentas" icon="ui-icon-minus" style="float: center;" />
+			</h:form>
 			</p:column>
 		</p:dataTable>
 		<h:form>

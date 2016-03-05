@@ -27,17 +27,36 @@ public class DTOLineaVenta {
 	}
 	
 	public void anadirLinea(Vendible prod, int cantidad){
-		System.out.println("aqui entra");
+		int f=0;
+		LineaVenta lineav=null;
 		for(LineaVenta v:lineas){
 			if(v.getVendible().getId()==prod.getId()){
-				v.setCantidad(v.getCantidad()+cantidad);
-				System.out.println(v.getCantidad());
-			}else{
-				lineas.add(new LineaVenta(this.getNuevoId(), prod, cantidad));
-				System.out.println("nueva");
+				lineav=v;
 			}
 		}
 		
+		if(lineav!=null){
+			lineav.setCantidad(lineav.getCantidad()+cantidad);
+		}else{
+			lineas.add(new LineaVenta(this.getNuevoId(), prod, cantidad));
+		}
+		
+	}
+	
+	public void eliminarLinea(int id){
+		for(LineaVenta v:lineas){
+			if(v.getVendible().getId()==id){
+				lineas.remove(v);
+			}
+		}
+	}
+	
+	public void updateCantidad(int id, int cantidad){
+		for(LineaVenta lin:lineas){
+			if(lin.getVendible().getId()==id){
+				lin.setCantidad(lin.getCantidad()+cantidad);
+			}
+		}
 	}
 	
 	public int getNuevoId() {

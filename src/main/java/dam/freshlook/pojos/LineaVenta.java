@@ -4,6 +4,8 @@ public class LineaVenta {
 	int id;
 	Vendible vendible;
 	int cantidad;
+	String tipo;
+	
 	public LineaVenta(int id, Vendible vendible, int cantidad) {
 		super();
 		this.id=id;
