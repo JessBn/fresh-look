@@ -9,6 +9,7 @@ import javax.faces.bean.ViewScoped;
 import dam.freshlook.dtos.DTOLineaVenta;
 import dam.freshlook.dtos.DTOProducto;
 import dam.freshlook.dtos.DTOServicio;
+import dam.freshlook.pojos.Producto;
 import dam.freshlook.services.ProductoService;
 import dam.freshlook.services.ServicioService;
 
@@ -44,6 +45,24 @@ public class VentasBean implements Serializable {
 	public void cargarTablaServicios(String busqueda){
 		servicios.setServicios(servicioService.cargarServicios(busqueda));
 	}
+	
+	public void anadirProductoCarrito(Producto prod, int cantidad){
+		if(cantidad<=0){
+			
+		}else{
+			if (prod.getCantidad() < cantidad) {
+
+			} else if (prod.getCantidad() == cantidad) {
+				lineas.anadirLinea(prod, cantidad);
+				productos.updateCantidadProducto(prod.getId(), -(cantidad));
+			} else {
+				lineas.anadirLinea(prod, cantidad);
+				productos.updateCantidadProducto(prod.getId(), -(cantidad));
+			}
+		}
+		
+		
+	}
 
 	public ProductoService getProductoService() {
 		return productoService;
@@ -75,6 +94,14 @@ public class VentasBean implements Serializable {
 
 	public void setServicios(DTOServicio servicios) {
 		this.servicios = servicios;
+	}
+
+	public DTOLineaVenta getLineas() {
+		return lineas;
+	}
+
+	public void setLineas(DTOLineaVenta lineas) {
+		this.lineas = lineas;
 	}
 	
 	

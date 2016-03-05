@@ -23,6 +23,14 @@ public class DTOProducto {
 	public void setProductos(List<Producto> productos) {
 		this.productos = productos;
 	}
+	
+	public void updateCantidadProducto(int id,int cantidad){
+		for(Producto prod:productos){
+			if(prod.getId()==id){
+				prod.setCantidad(prod.getCantidad()+cantidad);
+			}
+		}
+	}
 
 	public static int getNuevoId() {
 		int mayor;

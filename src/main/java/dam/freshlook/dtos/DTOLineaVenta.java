@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dam.freshlook.pojos.LineaVenta;
+import dam.freshlook.pojos.Producto;
+import dam.freshlook.pojos.Vendible;
 
 public class DTOLineaVenta {
 	static List<LineaVenta> lineas = new ArrayList<LineaVenta>();
@@ -16,15 +18,29 @@ public class DTOLineaVenta {
 
 	}
 
-	public List<LineaVenta> getLineaVentas() {
+	public List<LineaVenta> getLineas() {
 		return lineas;
 	}
 
-	public void setLineaVentas(List<LineaVenta> lineaVentas) {
+	public void setLineas(List<LineaVenta> lineaVentas) {
 		this.lineas = lineaVentas;
 	}
-
-	public static int getNuevoId() {
+	
+	public void anadirLinea(Vendible prod, int cantidad){
+		System.out.println("aqui entra");
+		for(LineaVenta v:lineas){
+			if(v.getVendible().getId()==prod.getId()){
+				v.setCantidad(v.getCantidad()+cantidad);
+				System.out.println(v.getCantidad());
+			}else{
+				lineas.add(new LineaVenta(this.getNuevoId(), prod, cantidad));
+				System.out.println("nueva");
+			}
+		}
+		
+	}
+	
+	public int getNuevoId() {
 		int mayor;
 		if (lineas.size() == 0) {
 			return 1;

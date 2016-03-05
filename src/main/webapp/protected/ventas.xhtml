@@ -42,8 +42,6 @@
 				<h:outputText value="#{product.nombre}" />
 			</p:column>
 
-		
-
 			<p:column headerText="Precio">
 				<h:outputText value="#{product.precio}" />
 			</p:column>
@@ -53,12 +51,14 @@
 			</p:column>
 
 			<p:column headerText="Opciones">
-			<p:inputText id="cantidad"
-				binding="#{cantidad}" style="width:30px;">
+			<h:form>
+			<p:inputText id="cant"
+				binding="#{cant}" style="width:30px;">
 				</p:inputText>
 				<p:commandButton type="submit"
-					actionListener="#{ventasBean.anadirServicio(servicio)}"
-					update="tablaServicios" icon="ui-icon-plus" style="float: center;" />
+					actionListener="#{ventasBean.anadirProductoCarrito(product, cant.value)}"
+					update="tablaProductos,tablaVentas" icon="ui-icon-plus" style="float: center;" />
+			</h:form>
 			</p:column>
 		</p:dataTable>
 		<p:dataTable id="tablaServicios" var="servicio" ajaxRendered="true"
@@ -89,8 +89,8 @@
 					update="tablaServicios" icon="ui-icon-plus" style="float: center;" />
 			</p:column>
 		</p:dataTable>
-		
 		<p:dataTable id="tablaVentas" var="linea" ajaxRendered="true"
+			style="clear: left !important;"
 			editable="true" reflow="true"
 			value="#{ventasBean.lineas.lineas}" rows="15" paginator="true"
 			paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -103,7 +103,7 @@
 			</p:column>
 
 			<p:column headerText="Id vendible">
-				<h:outputText value="#{linea.vendible.vendible.id}" />
+				<h:outputText value="#{linea.vendible.id}" />
 			</p:column>
 
 
@@ -126,10 +126,9 @@
 			<p:commandButton value="Realizar venta"
 				onclick="PF('insertar').show();" type="button" icon="ui-icon-check
 "
-				style="float: right; margin-top:2%;" />
+				style="float: right;" />
 
 		</h:form>
-
 		<h:panelGroup />
 	</ui:define>
 </ui:composition>

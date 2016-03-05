@@ -4,8 +4,9 @@ public class LineaVenta {
 	int id;
 	Vendible vendible;
 	int cantidad;
-	public LineaVenta(Vendible vendible, int cantidad) {
+	public LineaVenta(int id, Vendible vendible, int cantidad) {
 		super();
+		this.id=id;
 		this.vendible = vendible;
 		this.cantidad = cantidad;
 	}
