@@ -113,7 +113,7 @@
 						binding="#{contrasena}" />
 
 					<p:commandButton type="submit" value="Aceptar" ajax="true"
-						actionListener="#{clientesBean.modificarCliente(nombre.value,apellidos.value, direccion.value, usuario.value, contrasena.value)}"
+						actionListener="#{clientesBean.insertarCliente(nombre.value,apellidos.value, direccion.value, usuario.value, contrasena.value)}"
 						update="tablaClientes" onclick="PF('insertar').hide();">
 					</p:commandButton>
 				</h:panelGrid>
