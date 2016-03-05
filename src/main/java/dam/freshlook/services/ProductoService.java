@@ -72,9 +72,9 @@ public class ProductoService {
 			cl.setId((Integer)cur.curr().get("_id"));
 			cl.setNombre((String) cur.curr().get("nombre"));
 			cl.setDescripcion((String) cur.curr().get("descripcion"));
-			cl.setPrecio(Float.valueOf((String)cur.curr().get("precio")));
-			cl.setTipo((String) cur.curr().get("tipo"));
-			cl.setCantidad(Integer.valueOf((String)cur.curr().get("cantidad")));
+			cl.setPrecio(Float.valueOf(String.valueOf(cur.curr().get("precio"))));
+			cl.setTipo((String.valueOf(cur.curr().get("tipo"))));
+			cl.setCantidad(Integer.valueOf(String.valueOf(cur.curr().get("cantidad"))));
 			productos.add(cl);
 		}
 		return productos;

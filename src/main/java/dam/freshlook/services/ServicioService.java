@@ -71,11 +71,11 @@ public class ServicioService {
 			cl = new Servicio();
 			cur.next();
 			cl.setId((Integer)cur.curr().get("_id"));
-			cl.setNombre((String) cur.curr().get("nombre"));
-			cl.setDescripcion((String) cur.curr().get("descripcion"));
-			cl.setPrecio(Float.valueOf((String)cur.curr().get("precio")));
-			cl.setTipo((String) cur.curr().get("tipo"));
-			cl.setDuracion(Float.valueOf((String)cur.curr().get("duracion")));
+			cl.setNombre(String.valueOf(cur.curr().get("nombre")));
+			cl.setDescripcion(String.valueOf( cur.curr().get("descripcion")));
+			cl.setPrecio(Float.valueOf(String.valueOf(cur.curr().get("precio"))));
+			cl.setTipo(String.valueOf(cur.curr().get("tipo")));
+			cl.setDuracion(Float.valueOf(String.valueOf(cur.curr().get("duracion"))));
 			productos.add(cl);
 		}
 		return productos;

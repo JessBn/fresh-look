@@ -109,7 +109,7 @@
 
 					<p:commandButton type="submit" value="Aceptar" ajax="true"
 						actionListener="#{clientesBean.insertarCliente(nombre.value,apellidos.value, direccion.value, usuario.value, contrasena.value)}"
-						update="tablaClientes">
+						update="tablaClientes" onclick="PF('insertar').hide();">
 					</p:commandButton>
 				</h:panelGrid>
 			</p:dialog>

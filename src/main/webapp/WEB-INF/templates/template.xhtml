@@ -19,23 +19,18 @@
 					
 					<p:menuitem value="Inicio" url="/protected/protected.jsf" icon="ui-icon-home" />
 
-					<p:submenu label="Clientes" icon="ui-icon-person">
-						<p:menuitem value="Lista clientes" url="/protected/clientes.jsf"
-							icon="ui-icon-male" />
-						<p:menuitem value="Añadir cliente" url="#"
-							icon="ui-icon-plus-squaredw" />
-					</p:submenu>
+					<p:menuitem value="Clientes" url="/protected/clientes.jsf" icon="ui-icon-person" />
+
 
 					<p:menuitem value="Ventas" icon="ui-icon-suitcase" url="/protected/ventas.jsf" />
+					
 					<p:submenu label="Productos" icon="ui-icon-cart">
 						<p:menuitem value="Lista productos" url="/protected/productos.jsf"
 							icon="ui-icon-euro" />
-						<p:menuitem value="Añadir Stock" url="/protected/anadirStock.jsf"
+						<p:menuitem value="Lista servicios" url="/protected/servicios.jsf"
 							icon="ui-icon-euro" />
 					</p:submenu>
-
-
-
+					
 					<f:facet name="options">
 						<p:commandButton type="submit" value="Logout"
 							icon="ui-icon-extlink" actionListener="#{templateBean.doLogout}"
