@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/template.xhtml">
+
+	<ui:define name="content">
+		<h:form>
+			<p:inputText id="busqueda" style="float: right; margin-left:7% "
+				placeholder="Busqueda" binding="#{busqueda}">
+				<p:ajax event="keyup" update="tablaServicios"
+					listener="#{serviciosBean.cargarTabla(busqueda.value)}" />
+			</p:inputText>
+		</h:form>
+		<p:dataTable id="tablaServicios" var="prod" ajaxRendered="true"
+			editable="true" reflow="true"
+			value="#{serviciosBean.servicios.servicios}" rows="15" paginator="true"
+			paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="15, 20, 30">
+			<f:facet name="header">
+           Servicios
+       		</f:facet>
+			<p:ajax event="rowEdit" listener="#{serviciosBean.onRowEdit}" update="tablaServicios" />
+			<p:ajax event="rowEditCancel" update="tablaServicios" />
+			<p:column headerText="Id">
+				<h:outputText value="#{prod.id}" />
+			</p:column>
+
+			<p:column headerText="Nombre">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{prod.nombre}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{prod.nombre}" label="Nombre" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Descripción">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{prod.descripcion}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{prod.descripcion}" label="Descripción" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Precio">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{prod.precio}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{prod.precio}" label="Precio" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Tipo">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{prod.tipo}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{prod.tipo}" label="Tipo" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+			
+			<p:column headerText="Duración">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{prod.duracion}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{prod.duracion}" label="Duración" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Opciones">
+				<p:commandButton type="submit"
+					actionListener="#{serviciosBean.eliminarServicio(prod)}"
+					update="tablaServicios" icon="ui-icon-trash" style="float: center;" />
+
+				<p:commandButton type="submit" update="tablaServicios"
+					icon="ui-icon-search" style="float: center;" />
+			</p:column>
+		</p:dataTable>
+		<h:form>
+
+			<p:commandButton value="Añadir Servicio"
+				onclick="PF('insertar').show();" type="button" icon="ui-icon-plus"
+				style="float: right; margin-top:2%;" />
+			<p:dialog header="Nuevo servicio" widgetVar="insertar"
+				focus="clNombre">
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputLabel for="nombre" value="Nombre:" />
+					<p:inputText id="clNombre" label="nombre" binding="#{nombre}" />
+
+					<h:outputLabel for="descripcion" value="Descripción:" />
+					<p:inputText id="clDescripcion" label="descripcion"
+						binding="#{descripcion}" />
+
+					<h:outputLabel for="precio" value="Precio:" />
+					<p:inputText id="clPrecio" label="precio"
+						binding="#{precio}" />
+
+					<h:outputLabel for="duracion" value="Duración" />
+					<p:inputText id="clDuracion" label="duracion"
+						binding="#{duracion}" />
+
+					<p:commandButton type="submit" value="Aceptar" ajax="true"
+						actionListener="#{serviciosBean.insertarServicio(nombre.value, descripcion.value, precio.value, tipo.value, duracion.value)}"
+						update="tablaServicios" onclick="PF('insertar').hide();">
+					</p:commandButton>
+				</h:panelGrid>
+			</p:dialog>
+
+		</h:form>
+
+		<h:panelGroup />
+	</ui:define>
+</ui:composition>
