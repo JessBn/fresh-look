@@ -26,22 +26,40 @@ public class ClientesBean implements Serializable {
 	
 
 	DTOCliente clientes;
-
+	
+	/**
+	 * Contructor 
+	 */
 	public ClientesBean() {
 		this.init();
 	}
-
+	
+	/**
+	 * Inicialización de propidades
+	 */
 	public void init() {
 		clientes = new DTOCliente();
 		service = ClienteService.getInstance();
 		this.cargarTabla("");
 	}
 	
+	/**
+	 * Elimina un cliente
+	 * @param Cliente c 
+	 */
 	public void eliminarCliente(Cliente c){
 		service.eliminarCliente(c.getId());
 		this.cargarTabla("");
 	}
 	
+	/**
+	 * Inserta un cliente
+	 * @param nombre
+	 * @param apellidos
+	 * @param direccion
+	 * @param usuario
+	 * @param contrasena
+	 */
 	public void insertarCliente(String nombre, String apellidos, String direccion, String usuario, String contrasena){
 		Cliente cl = new Cliente();
 		cl.setId(DTOCliente.getNuevoId());
@@ -55,6 +73,15 @@ public class ClientesBean implements Serializable {
 		this.cargarTabla("");
 	}
 	
+	/**
+	 * Modifica un cliente
+	 * @param id
+	 * @param nombre
+	 * @param apellidos
+	 * @param direccion
+	 * @param usuario
+	 * @param contrasena
+	 */
 	public void modificarCliente(int id, String nombre, String apellidos, String direccion, String usuario, String contrasena){
 		Cliente cl = new Cliente();
 		System.out.println(cl);
@@ -67,24 +94,46 @@ public class ClientesBean implements Serializable {
 		this.service.insertarCliente(cl);
 		this.cargarTabla("");
 	}
+	
+	/**
+	 * Evento que se dispara cuando se edita una linea
+	 * @param event
+	 */
 	public void onRowEdit(RowEditEvent event) {
         String cliente= ((Cliente) event.getObject()).getNombre();
         System.out.println(cliente);
        //this.service.modificarCliente(cliente);
     }
 	
+	/**
+	 * Recurso para refrescar la tabla, se llama desde EL de JSF en .xhtml
+	 * @param busqueda
+	 */
 	public void cargarTabla(String busqueda){
 		clientes.setClientes(service.cargarClientes(busqueda));
 	}
 
+	/**
+	 * getCliente
+	 * @return
+	 */
 	public DTOCliente getClientes() {
 		return clientes;
 	}
 
+	/**
+	 * Set ClienteService
+	 * @param service
+	 */
 	public void setService(ClienteService service) {
 		this.service = service;
 	}
 	
+	/**
+	 * Encripta la contraseña
+	 * @param string
+	 * @return
+	 */
 	public String encriptar(String string){
 		MessageDigest messageDigest = null;
 		try {

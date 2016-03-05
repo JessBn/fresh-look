@@ -6,7 +6,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 
 public class Conexion {
-	private static final String BD_IP = "localhost";
+	private static final String BD_IP = "90.74.183.48";
 
 	
 	private static Conexion instance = null;
