@@ -8,14 +8,14 @@ import dam.freshlook.pojos.Producto;
 import dam.freshlook.pojos.Vendible;
 
 public class DTOLineaVenta {
-	static List<LineaVenta> lineas = new ArrayList<LineaVenta>();
+	List<LineaVenta> lineas = new ArrayList<LineaVenta>();
 
 	public DTOLineaVenta(ArrayList<LineaVenta> lineaVenta) {
 		this.lineas = lineaVenta;
 	}
 
 	public DTOLineaVenta() {
-
+		
 	}
 
 	public List<LineaVenta> getLineas() {
@@ -38,16 +38,20 @@ public class DTOLineaVenta {
 		if(lineav!=null){
 			lineav.setCantidad(lineav.getCantidad()+cantidad);
 		}else{
-			lineas.add(new LineaVenta(this.getNuevoId(), prod, cantidad));
+			lineas.add(new LineaVenta(this.getNuevoId(), prod, cantidad, prod.getPrecio()*cantidad));
 		}
 		
 	}
 	
 	public void eliminarLinea(int id){
+		LineaVenta el=null;
 		for(LineaVenta v:lineas){
 			if(v.getVendible().getId()==id){
-				lineas.remove(v);
+				el = v;
 			}
+		}
+		if(el!=null){
+			lineas.remove(el);
 		}
 	}
 	

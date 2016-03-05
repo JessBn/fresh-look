@@ -12,6 +12,7 @@ import dam.freshlook.dtos.DTOServicio;
 import dam.freshlook.pojos.Producto;
 import dam.freshlook.pojos.Servicio;
 import dam.freshlook.pojos.Vendible;
+import dam.freshlook.pojos.LineaVenta;
 import dam.freshlook.services.ProductoService;
 import dam.freshlook.services.ServicioService;
 
@@ -25,6 +26,8 @@ public class VentasBean implements Serializable {
 	DTOLineaVenta lineas;
 	DTOProducto productos;
 	DTOServicio servicios;
+	
+	float total=0;
 	
 	public VentasBean(){
 		this.init();
@@ -62,6 +65,7 @@ public class VentasBean implements Serializable {
 				productos.updateCantidadProducto(prod.getId(), -(cantidad));
 			}
 		}
+		this.actualizarTotal();
 	}
 	
 	public void anadirServicioCarrito(Servicio prod, int cantidad){
@@ -70,6 +74,7 @@ public class VentasBean implements Serializable {
 		}else{
 			lineas.anadirLinea(prod, cantidad);
 		}
+		this.actualizarTotal();
 	}
 
 	public void restarVendibleCarrito(Vendible prod,int cantidad, int cantrest){
@@ -85,13 +90,24 @@ public class VentasBean implements Serializable {
 				}
 			} else {
 				if(prod.getTipo().equals("producto")){
-					productos.updateCantidadProducto(prod.getId(), cantidad);
+					productos.updateCantidadProducto(prod.getId(), cantrest);
 					lineas.updateCantidad(prod.getId(), -(cantrest));
 				}else if(prod.getTipo().equals("servicio")){
 					lineas.updateCantidad(prod.getId(), -(cantrest));
 				}
 			}
 		}
+		this.actualizarTotal();
+	}
+	
+	public void actualizarTotal(){
+		int tot=0;
+		for(LineaVenta l:lineas.getLineas()){
+			tot += l.getTotal();
+		}
+		
+		this.total=tot;
+		System.out.println("se llama a actualizar total: "+total);
 	}
 	
 	public ProductoService getProductoService() {
@@ -132,6 +148,14 @@ public class VentasBean implements Serializable {
 
 	public void setLineas(DTOLineaVenta lineas) {
 		this.lineas = lineas;
+	}
+
+	public float getTotal() {
+		return total;
+	}
+
+	public void setTotal(float total) {
+		this.total = total;
 	}
 	
 	

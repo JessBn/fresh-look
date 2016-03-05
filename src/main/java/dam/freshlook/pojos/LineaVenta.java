@@ -4,13 +4,14 @@ public class LineaVenta {
 	int id;
 	Vendible vendible;
 	int cantidad;
-	String tipo;
+	float total;
 	
-	public LineaVenta(int id, Vendible vendible, int cantidad) {
+	public LineaVenta(int id, Vendible vendible, int cantidad, float total) {
 		super();
 		this.id=id;
 		this.vendible = vendible;
 		this.cantidad = cantidad;
+		this.total=total;
 	}
 	public LineaVenta() {
 		super();
@@ -26,6 +27,14 @@ public class LineaVenta {
 	}
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
+	}
+	
+	
+	public float getTotal() {
+		return total;
+	}
+	public void setTotal(float total) {
+		this.total = total;
 	}
 	@Override
 	public String toString() {

@@ -25,11 +25,16 @@ public class DTOProducto {
 	}
 	
 	public void updateCantidadProducto(int id,int cantidad){
+		Producto p=null;
 		for(Producto prod:productos){
 			if(prod.getId()==id){
-				prod.setCantidad(prod.getCantidad()+cantidad);
+				p=prod;
 			}
 		}
+		if(p!=null){
+			p.setCantidad(p.getCantidad()+cantidad);
+		}
+		
 	}
 
 	public static int getNuevoId() {

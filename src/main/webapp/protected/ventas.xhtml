@@ -28,9 +28,9 @@
 		<p:dataTable id="tablaProductos" var="product" ajaxRendered="true"
 			style="display:inline !important; float:left !important; width:49% !important;"
 			editable="true" reflow="true"
-			value="#{ventasBean.productos.productos}" rows="15" paginator="true"
+			value="#{ventasBean.productos.productos}" rows="5" paginator="true"
 			paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-			rowsPerPageTemplate="15, 20, 30">
+			rowsPerPageTemplate="5, 10, 20">
 			<f:facet name="header">
            Productos
 			</f:facet>
@@ -57,16 +57,18 @@
 				</p:inputText>
 				<p:commandButton type="submit"
 					actionListener="#{ventasBean.anadirProductoCarrito(product, cant.value)}"
-					update="tablaProductos,tablaVentas" icon="ui-icon-plus" style="float: center;" />
+					update="tablaProductos, tablaVentas, :form1:total" icon="ui-icon-plus" style="float: center;">
+				</p:commandButton>
+				
 			</h:form>
 			</p:column>
 		</p:dataTable>
 		<p:dataTable id="tablaServicios" var="servicio" ajaxRendered="true"
 			style="display:inline !important; float:right !important; width:49% !important;"
 			editable="true" reflow="true"
-			value="#{ventasBean.servicios.servicios}" rows="15" paginator="true"
+			value="#{ventasBean.servicios.servicios}" rows="5" paginator="true"
 			paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-			rowsPerPageTemplate="15, 20, 30">
+			rowsPerPageTemplate="5, 10, 20">
 			<f:facet name="header">
            Servicios
 			</f:facet>
@@ -89,16 +91,16 @@
 				</p:inputText>
 				<p:commandButton type="submit"
 					actionListener="#{ventasBean.anadirServicioCarrito(servicio, cant1.value)}"
-					update="tablaServicios,tablaVentas" icon="ui-icon-plus" style="float: center;" />
+					update="tablaVentas, tablaProductos, :form1:total" icon="ui-icon-plus" style="float: center;" />
 			</h:form>
 			</p:column>
 		</p:dataTable>
 		<p:dataTable id="tablaVentas" var="linea" ajaxRendered="true"
 			style="clear: left !important;"
 			editable="true" reflow="true"
-			value="#{ventasBean.lineas.lineas}" rows="15" paginator="true"
+			value="#{ventasBean.lineas.lineas}" rows="5" paginator="true"
 			paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-			rowsPerPageTemplate="15, 20, 30">
+			rowsPerPageTemplate="5, 10, 20">
 			<f:facet name="header">
             Carrito
 			</f:facet>
@@ -118,6 +120,10 @@
 			<p:column headerText="Cantidad">
 				<h:outputText value="#{linea.cantidad}" />
 			</p:column>
+			
+			<p:column headerText="Total">
+				<h:outputText value="#{linea.total}" />
+			</p:column>
 
 			<p:column headerText="Opciones">
 			<h:form>
@@ -126,16 +132,16 @@
 				</p:inputText>
 				<p:commandButton type="submit"
 					actionListener="#{ventasBean.restarVendibleCarrito(linea.vendible, linea.cantidad, cant3.value)}"
-					update="tablaVentas" icon="ui-icon-minus" style="float: center;" />
+					update="tablaVentas, tablaProductos, tablaServicios, :form1:total" icon="ui-icon-minus" style="float: center;" />
 			</h:form>
 			</p:column>
 		</p:dataTable>
-		<h:form>
-			
-			<p:commandButton value="Realizar venta"
-				onclick="PF('insertar').show();" type="button" icon="ui-icon-check
-"
+		<h:form id="form1">
+		<p:commandButton value="Realizar venta"
+				onclick="PF('insertar').show();" type="button" icon="ui-icon-check"
 				style="float: right;" />
+			<h:outputText id="total" value=" Precio total: #{ventasBean.total}" style="font-size:24px; float: right;"/>
+			
 
 		</h:form>
 		<h:panelGroup />
