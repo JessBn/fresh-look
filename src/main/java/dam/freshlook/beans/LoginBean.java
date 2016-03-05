@@ -25,7 +25,9 @@ import org.springframework.security.web.WebAttributes;
 @RequestScoped
 public class LoginBean implements PhaseListener {
 
-	 protected final Log logger = LogFactory.getLog(getClass());
+
+	
+	protected final Log logger = LogFactory.getLog(getClass());
 	
 	/**
 	 *
@@ -44,11 +46,15 @@ public class LoginBean implements PhaseListener {
 
 		dispatcher.forward((ServletRequest) context.getRequest(),
 				(ServletResponse) context.getResponse());
-		SecurityContextHolder.getContext().getAuthentication().getName();
+		
 
 		FacesContext.getCurrentInstance().responseComplete();
 
 		return null;
+	}
+	
+	public boolean tieneRol(String role){
+		return SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString().contains(role);
 	}
 
 	public void afterPhase(PhaseEvent event) {
@@ -79,4 +85,6 @@ public class LoginBean implements PhaseListener {
 	public PhaseId getPhaseId() {
 		return PhaseId.RENDER_RESPONSE;
 	}
+	
+	
 }

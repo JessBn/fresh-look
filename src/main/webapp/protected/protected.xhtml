@@ -14,20 +14,20 @@
 		    margin-right: 5%;
 		    width: 202px;
 		    height: 202px;" />
-		    <p:button  href="/protected/ventas.jsf" value="Ventas" id="irCompra" styleClass="ui-priority-primary" style="
+		<p:button  href="/protected/ventas.jsf" value="Ventas" id="irCompra" styleClass="ui-priority-primary" style="
         	margin-bottom: 5%;
         	margin-right: 5%;
 		    width: 202px;
 		    height: 202px;" />
-        <p:button href="/protected/productos.jsf"  value="Productos" id="irProducto" styleClass="ui-priority-primary" style="
+        <p:button href="/protected/productos.jsf"  value="Productos" id="irProducto"  rendered="#{loginController.tieneRol('ROLE_SUPERVISOR')}" styleClass="ui-priority-primary" style="
 		    margin-right: 5%;
 		    width: 202px;
 		    height: 202px;"/>
-		<p:button href="/protected/servicios.jsf"  value="Servicios" id="irServicio" styleClass="ui-priority-primary" style="
+		<p:button href="/protected/servicios.jsf"  value="Servicios" id="irServicio" rendered="#{loginController.tieneRol('ROLE_SUPERVISOR')}" styleClass="ui-priority-primary" style="
 		    margin-right: 5%;
 		    width: 202px;
 		    height: 202px;"/>
-      
+
 	</div>
 	</div>
 	</ui:define>

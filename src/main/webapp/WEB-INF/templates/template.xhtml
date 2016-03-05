@@ -24,10 +24,10 @@
 
 					<p:menuitem value="Ventas" icon="ui-icon-suitcase" url="/protected/ventas.jsf" />
 					
-					<p:submenu label="Productos" icon="ui-icon-cart">
-						<p:menuitem value="Lista productos" url="/protected/productos.jsf"
+					<p:submenu label="Productos" icon="ui-icon-cart"  rendered="#{loginController.tieneRol('ROLE_SUPERVISOR')}">
+						<p:menuitem value="Lista productos" url="/protected/productos.jsf"  rendered="#{loginController.tieneRol('ROLE_SUPERVISOR')}"
 							icon="ui-icon-euro" />
-						<p:menuitem value="Lista servicios" url="/protected/servicios.jsf"
+						<p:menuitem value="Lista servicios" url="/protected/servicios.jsf"  rendered="#{loginController.tieneRol('ROLE_SUPERVISOR')}"
 							icon="ui-icon-euro" />
 					</p:submenu>
 					

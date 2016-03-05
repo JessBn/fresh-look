@@ -1,10 +1,14 @@
 package dam.freshlook.beans;
 
+import java.io.IOException;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import org.primefaces.event.RowEditEvent;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import dam.freshlook.dtos.DTOProducto;
 import dam.freshlook.pojos.Producto;
@@ -28,6 +32,14 @@ public class ProductosBean {
 		productos = new DTOProducto();
 		service = ProductoService.getInstance();
 		this.cargarTabla("");
+		if(!SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString().contains("ROLE_SUPERVISOR")) {
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("/FreshLook/protected/protected.jsf");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		}
 	}
 	
 	public void eliminarProducto(Producto c){
