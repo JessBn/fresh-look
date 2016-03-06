@@ -38,9 +38,6 @@ public class ClienteService {
 	      }
 	      return instance;
 	}
-
-	
-	
 	
 	public List<Cliente> cargarClientes(String busqueda) {
 		Cliente cl = new Cliente();

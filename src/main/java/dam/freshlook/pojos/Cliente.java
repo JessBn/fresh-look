@@ -1,4 +1,4 @@
- package dam.freshlook.pojos;
+package dam.freshlook.pojos;
 
 import java.io.Serializable;
 
@@ -9,7 +9,12 @@ public class Cliente implements Serializable{
 	String direccion;
 	String usuario;
 	String contrasena;
-	public Cliente(int id, String nombre, String apellidos, String direccion, String usuario, String contrasena) {
+	public Cliente(int id,
+			String nombre,
+			String apellidos,
+			String direccion,
+			String usuario,
+			String contrasena) {
 		super();
 		this.id=id;
 		this.nombre = nombre;
