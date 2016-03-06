@@ -21,13 +21,23 @@ import dam.freshlook.services.ClienteService;
 @ManagedBean(name = "clientesBean")
 @ViewScoped
 public class ClientesBean implements Serializable {
+	
 	@ManagedProperty("#{clienteService}")
 	private ClienteService service;
 	private Cliente clienteAux;
 
 	public void setCliente(Cliente c){
 		clienteAux=c;
+		listener();
 	}
+	
+	public void listener(){
+		System.out.println(clienteAux.toString()); 
+	}
+	public Cliente getClienteAux(){
+		return clienteAux;
+	}
+	
 	DTOCliente clientes;
 	
 	/**
