@@ -26,6 +26,9 @@ public class ServiciosBean {
 		servicioAux = s;
 	}
 
+	public Servicio getServicioAux(){
+		return servicioAux;
+	}
 	DTOServicio servicios;
 
 	public ServiciosBean() {

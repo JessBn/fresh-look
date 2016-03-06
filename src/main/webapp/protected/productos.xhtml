@@ -88,31 +88,33 @@
 					actionListener="#{productosBean.eliminarProducto(prod)}"
 					update="tablaProductos" icon="ui-icon-trash" style="float: center;" />
 
-				<p:commandButton type="submit" update="tablaProductos"
+				<p:commandButton type="submit" update=":formModificar:panelModificar"
 					actionListener="#{productosBean.setProducto(prod)}"
 					icon="ui-icon-search" style="float: center;" 
 					onclick="PF('modificar').show();"/>
 			</p:column>
 		</p:dataTable>
-		<h:form>
-
-			<p:commandButton value="Añadir Producto"
+		
+		<p:commandButton value="Añadir Producto"
 				onclick="PF('insertar').show();" type="button" icon="ui-icon-plus"
 				style="float: right; margin-top:2%;" />
+				
+		<h:form>
+		
 			<p:dialog header="Nuevo producto" widgetVar="insertar">
 				<h:panelGrid columns="2" cellpadding="5">
-					<h:outputLabel for="nombre" value="Nombre:" />
+					<h:outputLabel  value="Nombre:" />
 					<p:inputText id="clNombre" label="nombre" binding="#{nombre}" />
 
-					<h:outputLabel for="descripcion" value="Descripción:" />
+					<h:outputLabel  value="Descripción:" />
 					<p:inputText id="clDescripcion" label="descripcion"
 						binding="#{descripcion}" />
 
-					<h:outputLabel for="precio" value="Precio:" />
+					<h:outputLabel value="Precio:" />
 					<p:inputText id="clPrecio" label="precio"
 						binding="#{precio}" />
 
-					<h:outputLabel for="cantidad" value="Cantidad:" />
+					<h:outputLabel value="Cantidad:" />
 					<p:inputText id="clCantidad" label="cantidad"
 						binding="#{cantidad}" />
 
@@ -126,29 +128,36 @@
 		</h:form>
 		
 		<h:form id="formModificar">
+		
 			<p:dialog header="Modificar producto" widgetVar="modificar">
-				<h:panelGrid columns="2" cellpadding="5">
-					<h:outputLabel for="nombre" value="Nombre:" />
-					<p:inputText id="clNombreModificar" label="nombre" binding="#{nombre}" />
-
-					<h:outputLabel for="descripcion" value="Descripción:" />
-					<p:inputText id="clDescripcionModificar" label="descripcion"
-						binding="#{descripcion}" />
-
-					<h:outputLabel for="precio" value="Precio:" />
-					<p:inputText id="clPrecioModificar" label="precio"
-						binding="#{precio}" />
-
-					<h:outputLabel for="cantidad" value="Cantidad:" />
-					<p:inputText id="clCantidadModificar" label="cantidad"
-						binding="#{cantidad}" />
-
-					<p:commandButton type="submit" value="Aceptar" ajax="true"
-						actionListener="#{productosBean.modificarProducto(nombre.value, descripcion.value, precio.value, tipo.value, cantidad.value)}"
-						update="tablaProductos" onclick="PF('modificar').hide();">
-					</p:commandButton>
-				</h:panelGrid>
+				<p:outputPanel id="panelModificar">
+					<h:panelGrid columns="2" cellpadding="5">
+					
+						<h:outputLabel value="Nombre:" />
+						<p:inputText id="clNombreModificar" label="Nombre" binding="#{nombreModificar}" 
+							value="#{productosBean.productoAux.nombre}"/>
+			
+						<h:outputLabel value="Descripción:" />
+						<p:inputText id="clDescripciónModificar" label="Descripcion" binding="#{descripcionModificar}" 
+							value="#{productosBean.productoAux.descripcion}"/>
+			
+						<h:outputLabel value="Precio:" />
+						<p:inputText id="clPrecioModificar" label="Precio" binding="#{precioModificar}" 
+							value="#{productosBean.productoAux.precio}"/>
+							
+						<h:outputLabel value="Cantidad:" />
+						<p:inputText id="clCantidadModificar" label="Cantidad" binding="#{cantidadModificar}" 
+							value="#{productosBean.productoAux.cantidad}"/>
+	
+						<p:commandButton type="submit" value="Aceptar" ajax="true"
+							actionListener="#{productosBean.modificarProducto(nombreModificar.value, descripcionModificar.value, precioModificar.value, cantidadModificar.value)}"
+							update="tablaProductos" onclick="PF('modificar').hide();">
+						</p:commandButton>
+						
+					</h:panelGrid>
+				</p:outputPanel>
 			</p:dialog>
+			
 		</h:form>
 
 		<h:panelGroup />

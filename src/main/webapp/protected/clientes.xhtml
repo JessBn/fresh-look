@@ -14,6 +14,7 @@
 					listener="#{clientesBean.cargarTabla(busqueda.value)}" />
 			</p:inputText>
 		</h:form>
+		
 		<p:dataTable id="tablaClientes" var="client" ajaxRendered="true"
 			editable="true" reflow="true"
 			value="#{clientesBean.clientes.clientes}" rows="15" paginator="true"
@@ -78,7 +79,7 @@
 						actionListener="#{clientesBean.eliminarCliente(client)}"
 						update="tablaClientes" icon="ui-icon-trash" style="float: center;" />
 	
-					<p:commandButton type="submit" update="tablaClientes"
+					<p:commandButton type="submit" update=":formModificar:panelModificar"
 						actionListener="#{clientesBean.setCliente(client)}"
 						icon="ui-icon-search" style="float: center;" 
 						onclick="PF('modificar').show();" >
@@ -92,85 +93,67 @@
 		<p:commandButton value="Añadir Cliente"
 				onclick="PF('insertar').show();" type="button" icon="ui-icon-plus"
 				style="float: right; margin-top:2%;" />
-				
-		<h:form>
 		
-			<p:dialog id="dialogInsertar" header="Nuevo cliente" widgetVar="insertar">
-				<h:panelGrid columns="2" cellpadding="5">
-				
-					<h:outputLabel for="nombre" value="Nombre:" />
-					<p:inputText id="clNombre" label="nombre" binding="#{nombre}" />
-
-					<h:outputLabel for="apellidos" value="Apellidos:" />
-					<p:inputText id="clApellidos" label="apellidos" binding="#{apellidos}" />
-
-					<h:outputLabel for="direccion" value="Dirección:" />
-					<p:inputText id="clDireccion" label="direccion" binding="#{direccion}" />
-
-					<h:outputLabel for="usuario" value="Usuario:" />
-					<p:inputText id="clUsuario" label="teléfono" binding="#{usuario}" />
-
-					<h:outputLabel for="contrasena" value="Contraseña:" />
-					<p:password id="clContrasena" label="contraseña" binding="#{contrasena}" />
-
-					<p:commandButton type="submit" value="Aceptar" ajax="true"
-						actionListener="#{clientesBean.insertarCliente(nombre.value, apellidos.value, direccion.value, usuario.value, contrasena.value)}"
-						update="tablaClientes" onclick="PF('insertar').hide();">
-					</p:commandButton>
+		<h:form id="formModificar">
+		
+			<p:dialog header="Modificar cliente" widgetVar="modificar">
+				<p:outputPanel id="panelModificar">
+					<h:panelGrid columns="2" cellpadding="5">
+						
+						<h:outputLabel value="Nombre:" />
+						<p:inputText id="clNombreModificar" label="nombre" binding="#{nombreModificar}" 
+							value="#{clientesBean.clienteAux.nombre}"/>
+			
+						<h:outputLabel value="Apellidos:" />
+						<p:inputText id="clApellidosModificar" label="apellidos" binding="#{apellidosModificar}" 
+							value="#{clientesBean.clienteAux.apellidos}"/>
+			
+						<h:outputLabel value="Dirección:" />
+						<p:inputText id="clDireccionModificar" label="direccion" binding="#{direccionModificar}" 
+							value="#{clientesBean.clienteAux.direccion}"/>
+							
+						<h:outputLabel value="Usuario:" />
+						<p:inputText id="clUsuarioModificar" label="teléfono" binding="#{usuarioModificar}" 
+							value="#{clientesBean.clienteAux.usuario}"/>
+			
+						<p:commandButton type="submit" value="Modificar" ajax="true"
+							actionListener="#{clientesBean.modificarCliente(nombreModificar.value, apellidosModificar.value, direccionModificar.value, usuarioModificar.value)}"
+							update="tablaClientes" onclick="PF('modificar').hide();"/>
 					
-				</h:panelGrid>
+					</h:panelGrid>
+				</p:outputPanel>
 			</p:dialog>
 			
 		</h:form>
 		
-		<h:form>
+		<h:form id="formInsertar">
 		
-			<p:dialog header="Modificar cliente" widgetVar="modificar">
+			<p:dialog header="Nuevo cliente" widgetVar="insertar">
+				<p:outputPanel id="panelInsertar">
 					<h:panelGrid columns="2" cellpadding="5">
-						
-					<h:outputLabel for="nombre" value="Nombre:" />
-					<p:inputText id="clNombreModificar" label="nombre" binding="#{nombre}" 
-						value="#{clientesBean.clienteAux.nombre}" valueChangeListener="#{clientesBean.clienteAux}">
-						
-						<f:ajax listener="#{clientesBean.listener}" />
-					</p:inputText>
-		
-					<h:outputLabel for="apellidos" value="Apellidos:" />
-					<p:inputText id="clApellidosModificar" label="apellidos"
-						binding="#{apellidos}" value="#{clientesBean.clienteAux.apellidos}" valueChangeListener="#{clientesBean.clienteAux}">
-						
-						<f:ajax listener="#{clientesBean.listener}" />
-					</p:inputText>
-		
-					<h:outputLabel for="direccion" value="Dirección:" />
-					<p:inputText id="clDireccionModificar" label="direccion"
-						binding="#{direccion}" value="#{clientesBean.clienteAux.direccion}" valueChangeListener="#{clientesBean.clienteAux}">
-									
-						<f:ajax listener="#{clientesBean.listener}" />
-					</p:inputText>
-		
-					<h:outputLabel for="usuario" value="Usuario:" />
-					<p:inputText id="clUsuarioModificar" label="teléfono" binding="#{usuario}" value="#{clientesBean.clienteAux.usuario}" 
-						valueChangeListener="#{clientesBean.clienteAux}">
-						
-						<f:ajax listener="#{clientesBean.listener}" />
-					</p:inputText>
-		
-					<h:outputLabel for="contrasena" value="Contraseña:" />
-					<p:password id="clContrasenaModificar" label="contraseña"
-						binding="#{contrasena}" value="#{clientesBean.clienteAux.contrasena}" valueChangeListener="#{clientesBean.clienteAux}">
-						
-						<f:ajax listener="#{clientesBean.listener}" />
-					</p:password>
-		
-					<p:commandButton type="submit" value="Modificar" ajax="true"
-						actionListener="#{clientesBean.modificarCliente(nombre.value, apellidos.value, direccion.value, usuario.value, contrasena.value)}"
-						update="tablaClientes" onclick="PF('modificar').hide();">
-					</p:commandButton>
 					
-				</h:panelGrid>
-			</p:dialog>
+					<h:outputLabel value="Nombre:" />
+					<p:inputText id="clNombrer" label="nombre" binding="#{nombre}"/>
 			
+					<h:outputLabel value="Apellidos:" />
+					<p:inputText id="clApellidos" label="apellidos" binding="#{apellidos}"/>
+			
+					<h:outputLabel value="Dirección:" />
+					<p:inputText id="clDireccion" label="direccion" binding="#{direccion}"/>
+			
+					<h:outputLabel value="Usuario:" />
+					<p:inputText id="clUsuario" label="teléfono" binding="#{usuario}"/>
+								
+					<h:outputLabel value="Contraseña:"/>
+					<p:password id="clContrasena" label="contraseña" binding="#{contrasena}"/>
+					
+					<p:commandButton type="submit" value="Aceptar" ajax="true" 
+						actionListener="#{clientesBean.insertarCliente(nombre.value,apellidos.value, direccion.value, usuario.value, contrasena.value)}" 
+						update="tablaClientes" onclick="PF('insertar').hide();"/>
+						
+					</h:panelGrid>
+				</p:outputPanel>
+			</p:dialog>
 		</h:form>
 
 		<h:panelGroup />

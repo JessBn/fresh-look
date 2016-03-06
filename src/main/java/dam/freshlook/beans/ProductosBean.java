@@ -25,6 +25,10 @@ public class ProductosBean {
 	public void setProducto(Producto p){
 		productoAux=p;
 	}
+	
+	public Producto getProductoAux(){
+		return productoAux;
+	}
 
 	DTOProducto productos;
 
@@ -63,7 +67,7 @@ public class ProductosBean {
 		this.cargarTabla("");
 	}
 	
-	public void modificarProducto(String nombre, String descripcion, String precio, String tipo, String cantidad){
+	public void modificarProducto(String nombre, String descripcion, String precio, String cantidad){
 		Producto cl = new Producto();
 		System.out.println(cl);
 		cl.setId(productoAux.getId());

@@ -28,12 +28,8 @@ public class ClientesBean implements Serializable {
 
 	public void setCliente(Cliente c){
 		clienteAux=c;
-		listener();
 	}
 	
-	public void listener(){
-		System.out.println(clienteAux.toString()); 
-	}
 	public Cliente getClienteAux(){
 		return clienteAux;
 	}
@@ -95,7 +91,7 @@ public class ClientesBean implements Serializable {
 	 * @param usuario
 	 * @param contrasena
 	 */
-	public void modificarCliente(String nombre, String apellidos, String direccion, String usuario, String contrasena){
+	public void modificarCliente(String nombre, String apellidos, String direccion, String usuario){
 		Cliente cl = new Cliente();
 		System.out.println(cl);
 		cl.setId(clienteAux.getId());
@@ -103,7 +99,7 @@ public class ClientesBean implements Serializable {
 		cl.setApellidos(apellidos);
 		cl.setDireccion(direccion);
 		cl.setUsuario(usuario);
-		cl.setContrasena(this.encriptar(contrasena));
+		cl.setContrasena(clienteAux.getContrasena());
 		this.service.modificarCliente(cl);
 		this.cargarTabla("");
 	}
